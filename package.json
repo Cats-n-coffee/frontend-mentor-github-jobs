@@ -3,16 +3,20 @@
   "version": "1.0.0",
   "private": true,
   "description": "![Design preview for the GitHub Jobs API coding challenge](./preview.jpg)",
-  "main": "index.js",
+  "main": "App.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "parcel src/index.html",
+    "prod": "parcel build src/index.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "parcel-bundler": "^1.12.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3",
+    "sass": "^1.32.8"
   }
 }
