@@ -1,18 +1,24 @@
 import React from 'react'
+import styled from 'styled-components'
+
 import DescriptionHeader from './DescriptionHeader'
 import DescriptionBody from './DescriptionBody'
 import DescriptionHowToApply from './DescriptionHowToApply'
 import DescriptionBtn from './DescriptionBtn'
 
+const DescriptionWrapper = styled.div`
+    padding: 0 ${ (props) => props.theme.padding.paddingMobile };
+`;
+
 const JobDescription = ({ isSelected, currentJob }) => {
     return ( 
-        <div>
-            <button onClick={ () => isSelected() }>unselect</button>
+        <DescriptionWrapper>
+            {/* <button onClick={ () => isSelected() }>unselect</button> */}
             <DescriptionHeader job={ currentJob }/>
             <DescriptionBody job={ currentJob }/>
             <DescriptionHowToApply job={ currentJob }/>
             <DescriptionBtn job={ currentJob }/>
-        </div>
+        </DescriptionWrapper>
      );
 }
  
