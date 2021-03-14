@@ -26,6 +26,7 @@ export default {
     },
 
     mediaQueries: {
+        above375: '376px',
         above600: '600px',
         above768: '768px',
         above1300: '1300px',

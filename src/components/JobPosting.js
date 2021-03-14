@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import JobDescription from './JobDescription'
 import { LogoSmall, TitleH2, InfoSpan, LogoWrapper, AdditionalInfoChild, JobLocation, AdditionalInfo } from './styledCommon/index'
 
 const JobCard = styled.li`
@@ -9,14 +8,10 @@ const JobCard = styled.li`
     display: flex;
     max-width: 350px;
     flex-direction: column;
-    background: white;
+    background: ${ (props) => props.theme.boxes};
     padding: 3em 2em 2em;
     border-radius: 6px;
     position: relative;
-
-    @media screen and (min-width: ${(props) => props.theme.mediaQueries.above1300}) {
-        max-width: 350px;
-    }
 `;
 
 const LogoWrapperCard = styled(LogoWrapper)`

@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
-import { DesktopWrapper, ButtonDark } from './styledCommon';
+
+import { DesktopWrapper, ButtonDark, FormSection } from './styledCommon'
+import Checkbox from './Checkbox'
+
 
 const FiltersForm = styled.form`
     position: relative;
@@ -8,7 +11,7 @@ const FiltersForm = styled.form`
     flex-direction: column;
     width: 100%;
     padding: 0 ${(props) => props.theme.padding. paddingMobile};
-    transform: translateY(-2em);
+    transform: translateY(-3em);
     z-index: 10;
 
     .first-form-section {
@@ -17,20 +20,6 @@ const FiltersForm = styled.form`
 
     @media screen and (min-width: ${ (props) => props.theme.mediaQueries.above768 }) {
         flex-direction: row;
-    }
-`;
-
-const FormSection = styled.div`
-    display: flex;
-    width: 100%;
-    background: white;
-    border-radius: 6px;
-    padding: 1.5em;
-
-    @media screen and (min-width: ${ (props) => props.theme.mediaQueries.above768 }) {
-        width: auto;
-        padding: 0;
-        flex: 0 1 33%;
     }
 `;
 
@@ -82,10 +71,11 @@ const FullTimeSearch = styled(FormSection)`
         width: 100%;
     }
 
-    label {
+    div > label {
         padding: 0 0 0 1em;
         font-weight: 700;
         word-break: keep-all;
+        color: ${ (props) => props.theme.fontColorTitle };
     }
 
     @media screen and (min-width: ${ (props) => props.theme.mediaQueries.above768 }) {
@@ -98,17 +88,20 @@ const InputForm = styled.input`
     font-family: ${(props) => props.theme.fonts.fontStack};
     font-size: ${(props) => props.theme.fontSizes.sizeP};
     border: none;
+    background: ${ (props) => props.theme.boxes };
+    color: ${(props) => props.theme.fontColorText};
 
-    &:placeholder {
+    &::placeholder {
         font-family: ${(props) => props.theme.fonts.fontStack};
-        color: ${(props) => props.theme.colors.veryDarkBlue};
+        color: ${(props) => props.theme.fontColorText};
     }
 
-    #search-full-time {
+    /* #search-full-time {
         padding: .3em;
         background: ${(props) => props.theme.colors.violet};
-    }
+    } */
 `;
+
 
 const SubmitBtn = styled.button`
     background: ${(props) => props.theme.colors.violet};
@@ -124,7 +117,7 @@ const SubmitBtn = styled.button`
     }
 
     @media screen and (min-width: ${ (props) => props.theme.mediaQueries.above768 }) {
-        background: white;
+        background: ${ (props) => props.theme.boxes};
         width: auto;
         height: auto;
         margin: 0 1em 0 0;
@@ -194,20 +187,6 @@ const Filters = ({ addFilters }) => {
         document.body.classList.toggle('scroll');
     }
 
-
-    // const validateTitle = (userInput) => {
-
-    // }
-
-    // const searchByDescription = (e) => {
-    //     e.preventDefault();
-
-    //     setUserFilters({ ...userfilters, description: descriptionRef.current.value});
-    //     setDescription('');
-      
-    //     addFilters({...userfilters, description: descriptionRef.current.value})
-    // }
-
     const searchRefined = (e) => {
         e.preventDefault();
         
@@ -220,12 +199,13 @@ const Filters = ({ addFilters }) => {
     }
 
     useEffect(() => {
-            if (window.innerWidth > 600) {
+            if (window.innerWidth > 768) {
                 setMobileFilters(true);
             }
     });
 
     return ( 
+        <DesktopWrapper>
             <FiltersForm onSubmit={searchRefined}>
                 <TitleSearch className="first-form-section">
                     <label htmlFor="search-title"></label>
@@ -269,14 +249,13 @@ const Filters = ({ addFilters }) => {
                         </LocationSearch>
                         <FullTimeSearch>
                             <div>
-                                <InputForm 
-                                    className="form-input"
-                                    type="checkbox" 
-                                    name="full-time" 
-                                    id="search-full-time"
-                                    checked={ fullTime }
-                                    onChange={ () => setFullTime(!fullTime)}/>
-                                <label htmlFor="search-full-time">Full Time</label>
+                                <label htmlFor="search-full-time">Full Time
+                                    <Checkbox
+                                        checked={ fullTime }
+                                        setFullTime={ setFullTime }
+                                    ></Checkbox> 
+                                        {/* className="form-input" */}
+                                </label>
                             </div>
                             <div className="search-button">
                                 <ApplyFiltersBtn 
@@ -289,6 +268,7 @@ const Filters = ({ addFilters }) => {
                     </MobileFilters> 
                 : null } 
             </FiltersForm>
+        </DesktopWrapper>
      );
 }
  

@@ -8,16 +8,17 @@ import JobDescription from './components/JobDescription'
 import Header from './components/Header'
 import GlobalStyle from './components/theme/globalStyles'
 import Theme from './components/theme/theme'
-import { DesktopWrapper } from './components/styledCommon'
+import { lightTheme, darkTheme } from './components/theme/darkMode'
 
 const AppWrapper = styled.div`
-    background: ${(props) => props.theme.colors.lightGrey};
+    background: ${(props) => props.theme.mainBackground};
     min-height: 100vh;
 `;
 
 function App() {
     const [isSelected, setIsSelected] = useState(false);
     const [currentJob, setCurrentJob] = useState('');
+    const [theme, setTheme] = useState('dark');
 
     const displayDescription = () => {
         setIsSelected(!isSelected);
@@ -27,21 +28,25 @@ function App() {
         setCurrentJob(job)
     }
 
+    const toggleTheme = (choice) => {
+        choice === true ? setTheme('light') : setTheme('dark');
+    }
+
     return (
-        <AppWrapper>
-            <DesktopWrapper>
-                <Header />
-                { isSelected 
-                ? <JobDescription isSelected={ displayDescription } currentJob={ currentJob }/> 
-                : <Results isSelected={ displayDescription } selectJob={ selectJob }/> }
-                </DesktopWrapper>
-        </AppWrapper>
+        <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme }>
+            <AppWrapper>
+                    <Header toggleTheme={ toggleTheme } theme={ theme }/>
+                    { isSelected 
+                    ? <JobDescription isSelected={ displayDescription } currentJob={ currentJob }/> 
+                    : <Results isSelected={ displayDescription } selectJob={ selectJob }/> }
+            </AppWrapper>
+        </ThemeProvider>
     )
 }
 
 ReactDOM.render(
-    <ThemeProvider theme={ Theme }> 
-        <GlobalStyle />
-        <App /> 
-    </ThemeProvider>, 
+        <ThemeProvider theme={ Theme }>
+            <GlobalStyle />
+            <App /> 
+        </ThemeProvider>, 
     document.getElementById('root'));

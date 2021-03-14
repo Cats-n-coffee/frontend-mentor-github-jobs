@@ -32052,11 +32052,11 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.JobLocation = exports.AdditionalInfoChild = exports.AdditionalInfo = exports.ButtonLight = exports.ButtonDark = exports.InfoSpan = exports.TitleH2 = exports.LogoWrapper = exports.LogoSmall = exports.DesktopWrapper = void 0;
+exports.FormSection = exports.JobLocation = exports.AdditionalInfoChild = exports.AdditionalInfo = exports.ButtonLight = exports.ButtonDark = exports.InfoSpan = exports.TitleH2 = exports.LogoWrapper = exports.LogoSmall = exports.DesktopWrapper = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32077,8 +32077,10 @@ var LogoWrapper = _styledComponents.default.div(_templateObject3 || (_templateOb
 
 exports.LogoWrapper = LogoWrapper;
 
-var TitleH2 = _styledComponents.default.h2(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    font-size: ", ";\n    font-weight: 700;\n"])), function (props) {
+var TitleH2 = _styledComponents.default.h2(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    font-size: ", ";\n    font-weight: 700;\n    color: ", ";\n"])), function (props) {
   return props.theme.fontSizes.sizeH2;
+}, function (props) {
+  return props.theme.fontColorTitles;
 });
 
 exports.TitleH2 = TitleH2;
@@ -32086,242 +32088,67 @@ exports.TitleH2 = TitleH2;
 var InfoSpan = _styledComponents.default.span(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    font-size: ", ";\n    font-weight: 400;\n    color: ", ";\n"])), function (props) {
   return props.theme.fontSizes.sizeP;
 }, function (props) {
-  return props.theme.colors.darkGrey;
+  return props.theme.fontColorText;
 });
 
 exports.InfoSpan = InfoSpan;
 
-var ButtonDark = _styledComponents.default.button(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: white;\n    border-radius: 6px;\n    border: none;\n    font-family: ", ";\n\n    &:hover {\n        background: ", ";\n    }\n"])), function (props) {
+var ButtonDark = _styledComponents.default.button(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: white;\n    border-radius: 6px;\n    border: none;\n    font-family: ", ";\n    font-size: ", ";\n    font-weight: 700;\n\n    &:hover {\n        background: ", ";\n    }\n\n    a {\n        text-decoration: none;\n        color: white;\n        font-size: ", ";\n        font-weight: 700;\n    }\n"])), function (props) {
   return props.theme.colors.violet;
 }, function (props) {
   return props.theme.fonts.fontStack;
 }, function (props) {
+  return props.theme.fontSizes.sizeP;
+}, function (props) {
   return props.theme.colors.lightViolet;
+}, function (props) {
+  return props.theme.fontSizes.sizeP;
 });
 
 exports.ButtonDark = ButtonDark;
 
-var ButtonLight = _styledComponents.default.button(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    background: rgba(89,100,224, 0.1);\n    color: ", ";\n    border-radius: 6px;\n    border: none;\n    font-family: ", ";\n    font-weight: 700;\n    font-size: ", ";\n\n    &:hover {\n        background: rgba(89,100,224,0.35);\n    }\n"])), function (props) {
-  return props.theme.colors.violet;
+var ButtonLight = _styledComponents.default.button(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border-radius: 6px;\n    border: none;\n    font-family: ", ";\n    font-weight: 700;\n    font-size: ", ";\n\n    &:hover {\n        background: rgba(89,100,224,0.35);\n    }\n\n    a {\n        color: ", ";\n        text-decoration: none;\n        font-size: ", ";\n        font-weight: 700;\n    }\n"])), function (props) {
+  return props.theme.buttonLightBox;
+}, function (props) {
+  return props.theme.buttonLightText;
 }, function (props) {
   return props.theme.fonts.fontStack;
+}, function (props) {
+  return props.theme.fontSizes.sizeP;
+}, function (props) {
+  return props.theme.buttonLightText;
 }, function (props) {
   return props.theme.fontSizes.sizeP;
 });
 
 exports.ButtonLight = ButtonLight;
 
-var AdditionalInfo = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\ndisplay: flex;\n"])));
+var AdditionalInfo = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    display: flex;\n"])));
 
 exports.AdditionalInfo = AdditionalInfo;
-var AdditionalInfoChild = (0, _styledComponents.default)(InfoSpan)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\nposition: relative;\npadding: 0 2em 0 0;\n\n&:not(:first-child):before {\n    content: '';\n    position: absolute;\n    left: -1.1em;\n    top: .5em;\n    display: block;\n    width: 3px;\n    height: 3px;\n    border-radius: 50%;\n    background-color: ", ";\n}\n\n"])), function (props) {
-  return props.theme.colors.darkGrey;
+var AdditionalInfoChild = (0, _styledComponents.default)(InfoSpan)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    position: relative;\n    padding: 0 2em 0 0;\n    color: ", ";\n\n    &:not(:first-child):before {\n        content: '';\n        position: absolute;\n        left: -1.1em;\n        top: .5em;\n        display: block;\n        width: 3px;\n        height: 3px;\n        border-radius: 50%;\n        background-color: ", ";\n    }\n\n"])), function (props) {
+  return props.theme.fontColorText;
+}, function (props) {
+  return props.theme.fontColorText;
 });
 exports.AdditionalInfoChild = AdditionalInfoChild;
 
-var JobLocation = _styledComponents.default.h4(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\ncolor: ", ";\nfont-size: ", ";\nfont-weight: 700;\n"])), function (props) {
+var JobLocation = _styledComponents.default.h4(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    color: ", ";\n    font-size: ", ";\n    font-weight: 700;\n"])), function (props) {
   return props.theme.colors.violet;
 }, function (props) {
   return props.theme.fontSizes.sizeH4;
 });
 
 exports.JobLocation = JobLocation;
-},{"styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/DescriptionHeader.js":[function(require,module,exports) {
-"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _styledComponents = _interopRequireDefault(require("styled-components"));
-
-var _styledCommon = require("./styledCommon");
-
-var _templateObject, _templateObject2, _templateObject3, _templateObject4;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-var DescriptionHeaderStyled = _styledComponents.default.section(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    padding: 2em 0;\n    background: white;\n    border-radius: 6px;\n    position: relative;\n    z-index: 2;\n    margin: -1em 0 0 0;\n"])));
-
-var LogoWrapperHeader = (0, _styledComponents.default)(_styledCommon.LogoWrapper)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: absolute;\n    top: -2em;\n    margin: 0 auto;\n"])));
-
-var CompanyName = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    text-align: center;\n    padding: 0 0 1em 0;\n    \n    h2 {\n        padding: 0 0 1em 0;\n    }\n"])));
-
-var CompanySiteBtn = (0, _styledComponents.default)(_styledCommon.ButtonLight)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    padding: 1em 3em;\n"])));
-
-var DescriptionHeader = function DescriptionHeader(_ref) {
-  var job = _ref.job;
-  return _react.default.createElement(DescriptionHeaderStyled, null, _react.default.createElement(LogoWrapperHeader, null, _react.default.createElement(_styledCommon.LogoSmall, {
-    src: job.company_logo,
-    alt: "Logo"
-  })), _react.default.createElement(CompanyName, null, _react.default.createElement("h2", null, job.company), _react.default.createElement("p", null, job.company_url)), _react.default.createElement("div", {
-    className: "description-header-btn"
-  }, _react.default.createElement(CompanySiteBtn, null, _react.default.createElement("a", {
-    href: job.company_url
-  }, "Company site"))));
-};
-
-var _default = DescriptionHeader;
-exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./styledCommon":"components/styledCommon/index.js"}],"components/DescriptionBody.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _styledComponents = _interopRequireDefault(require("styled-components"));
-
-var _styledCommon = require("./styledCommon");
-
-var _templateObject, _templateObject2, _templateObject3, _templateObject4;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-var DescriptionBodyStyled = _styledComponents.default.section(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    padding: 2em ", ";\n    background: white;\n    border-radius: 6px;\n    margin: 2em 0;\n"])), function (props) {
-  return props.theme.padding.paddingMobile;
+var FormSection = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    display: flex;\n    width: 100%;\n    background: ", ";\n    border-radius: 6px;\n    padding: 1em;\n\n    @media screen and (min-width: ", ") {\n        width: auto;\n        padding: 0;\n        flex: 0 1 33%;\n    }\n"])), function (props) {
+  return props.theme.boxes;
+}, function (props) {
+  return props.theme.mediaQueries.above768;
 });
 
-var BodyMainInfo = _styledComponents.default.article(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    padding: 0 0 2em 0;\n"])));
-
-var JobMainInfo = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    padding: 0 0 2em 0;\n"])));
-
-var ApplyNowBtn = (0, _styledComponents.default)(_styledCommon.ButtonDark)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    width: 100%;\n    padding: 1em 0;\n\n    a {\n        text-decoration: none;\n        color: white;\n        font-size: ", ";\n        font-weight: 700;\n    }\n"])), function (props) {
-  return props.theme.fontSizes.sizeP;
-});
-
-var DescriptionBody = function DescriptionBody(_ref) {
-  var job = _ref.job;
-  return _react.default.createElement(DescriptionBodyStyled, null, _react.default.createElement(BodyMainInfo, null, _react.default.createElement(JobMainInfo, null, _react.default.createElement(_styledCommon.AdditionalInfo, null, _react.default.createElement(_styledCommon.AdditionalInfoChild, null, job.created_at), _react.default.createElement(_styledCommon.AdditionalInfoChild, null, job.type)), _react.default.createElement(_styledCommon.TitleH2, null, job.title), _react.default.createElement(_styledCommon.JobLocation, null, job.location)), _react.default.createElement(ApplyNowBtn, null, _react.default.createElement("a", {
-    href: job.how_to_apply
-  }, "Apply Now"))), _react.default.createElement("p", {
-    dangerouslySetInnerHTML: {
-      __html: job.description
-    }
-  }));
-};
-
-var _default = DescriptionBody;
-exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./styledCommon":"components/styledCommon/index.js"}],"components/DescriptionHowToApply.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _styledCommon = require("./styledCommon");
-
-var _styledComponents = _interopRequireDefault(require("styled-components"));
-
-var _templateObject;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-var HowToApply = _styledComponents.default.section(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    padding: 2rem ", ";\n    border-radius: 6px;\n    height: 327px;\n    position: relative;\n    z-index: 1;\n    overflow: hidden;\n\n    &:before {\n        content: '';\n        position: absolute;\n        top: 0;\n        left: 0;\n        width: 100%;\n        height: 100%;\n        background: no-repeat url(\"data:image/svg+xml,%3Csvg width='327' height='372' fill='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 327 327'%3E%3Crect width='327' height='372' rx='6' fill='%235964E0'/%3E%3Cmask id='a' maskUnits='userSpaceOnUse' x='0' y='0' width='327' height='372'%3E%3Crect width='327' height='372' rx='6' fill='%23fff'/%3E%3C/mask%3E%3Cg mask='url(%23a)'%3E%3Cpath opacity='.081' fill-rule='evenodd' clip-rule='evenodd' d='M267.502 166.576c21.126-23.963 60.326-15.63 69.879 14.853l114.118 364.163c9.381 29.936-16.963 58.887-47.649 52.364L37.362 520.057c-30.685-6.522-42.976-43.685-22.23-67.217l252.37-286.264z' fill='%23fff'/%3E%3C/g%3E%3C/svg%3E\");\n        z-index: -1;\n    }\n"])), function (props) {
-  return props.theme.padding.paddingMobile;
-});
-
-var DescriptionHowToApply = function DescriptionHowToApply(_ref) {
-  var job = _ref.job;
-  return _react.default.createElement(HowToApply, null, _react.default.createElement(_styledCommon.TitleH2, null, "How to Apply"), _react.default.createElement("div", {
-    dangerouslySetInnerHTML: {
-      __html: job.how_to_apply
-    }
-  }));
-};
-
-var _default = DescriptionHowToApply;
-exports.default = _default;
-},{"react":"../node_modules/react/index.js","./styledCommon":"components/styledCommon/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/DescriptionBtn.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var DescriptionBtn = function DescriptionBtn(_ref) {
-  var job = _ref.job;
-  return _react.default.createElement("section", {
-    className: "description-footer-btn"
-  }, _react.default.createElement("div", {
-    className: "tablet-desktop"
-  }, _react.default.createElement("h3", null, job.title), _react.default.createElement("span", null, job.company)), _react.default.createElement("button", {
-    className: "apply-now"
-  }, _react.default.createElement("a", {
-    href: job.how_to_apply
-  }, "Apply Now")));
-};
-
-var _default = DescriptionBtn;
-exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"components/JobDescription.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _styledComponents = _interopRequireDefault(require("styled-components"));
-
-var _DescriptionHeader = _interopRequireDefault(require("./DescriptionHeader"));
-
-var _DescriptionBody = _interopRequireDefault(require("./DescriptionBody"));
-
-var _DescriptionHowToApply = _interopRequireDefault(require("./DescriptionHowToApply"));
-
-var _DescriptionBtn = _interopRequireDefault(require("./DescriptionBtn"));
-
-var _templateObject;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-var DescriptionWrapper = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    padding: 0 ", ";\n"])), function (props) {
-  return props.theme.padding.paddingMobile;
-});
-
-var JobDescription = function JobDescription(_ref) {
-  var isSelected = _ref.isSelected,
-      currentJob = _ref.currentJob;
-  return _react.default.createElement(DescriptionWrapper, null, _react.default.createElement(_DescriptionHeader.default, {
-    job: currentJob
-  }), _react.default.createElement(_DescriptionBody.default, {
-    job: currentJob
-  }), _react.default.createElement(_DescriptionHowToApply.default, {
-    job: currentJob
-  }), _react.default.createElement(_DescriptionBtn.default, {
-    job: currentJob
-  }));
-};
-
-var _default = JobDescription;
-exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./DescriptionHeader":"components/DescriptionHeader.js","./DescriptionBody":"components/DescriptionBody.js","./DescriptionHowToApply":"components/DescriptionHowToApply.js","./DescriptionBtn":"components/DescriptionBtn.js"}],"components/JobPosting.js":[function(require,module,exports) {
+exports.FormSection = FormSection;
+},{"styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/JobPosting.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32332,8 +32159,6 @@ exports.default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
-
-var _JobDescription = _interopRequireDefault(require("./JobDescription"));
 
 var _index = require("./styledCommon/index");
 
@@ -32347,8 +32172,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var JobCard = _styledComponents.default.li(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    min-width: 300px;\n    display: flex;\n    max-width: 350px;\n    flex-direction: column;\n    background: white;\n    padding: 3em 2em 2em;\n    border-radius: 6px;\n    position: relative;\n\n    @media screen and (min-width: ", ") {\n        max-width: 350px;\n    }\n"])), function (props) {
-  return props.theme.mediaQueries.above1300;
+var JobCard = _styledComponents.default.li(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    min-width: 300px;\n    display: flex;\n    max-width: 350px;\n    flex-direction: column;\n    background: ", ";\n    padding: 3em 2em 2em;\n    border-radius: 6px;\n    position: relative;\n"])), function (props) {
+  return props.theme.boxes;
 });
 
 var LogoWrapperCard = (0, _styledComponents.default)(_index.LogoWrapper)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: absolute;\n    margin: -4.5em 0 0 0;\n"])));
@@ -32372,7 +32197,96 @@ var JobPosting = function JobPosting(_ref) {
 
 var _default = JobPosting;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./JobDescription":"components/JobDescription.js","./styledCommon/index":"components/styledCommon/index.js"}],"components/Filters.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./styledCommon/index":"components/styledCommon/index.js"}],"components/checkboxStyles/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.VisibleCheckbox = exports.HiddenCheckbox = exports.CheckboxContainer = void 0;
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+var _templateObject, _templateObject2, _templateObject3;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var CheckboxContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    display: inline-block;\n    vertical-align: middle;\n"])));
+
+exports.CheckboxContainer = CheckboxContainer;
+
+var HiddenCheckbox = _styledComponents.default.input.attrs({
+  type: 'checkbox'
+})(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    width: 1px;\n    height: 1px;\n    border: 0;\n    overflow: hidden;\n    position: absolute;\n    white-space: nowrap;\n    clip: rect(0 0 0 0);\n    clip-path: inset(50%);\n    margin: -1px;\n"])));
+
+exports.HiddenCheckbox = HiddenCheckbox;
+
+var VisibleCheckbox = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: inline-block;\n    width: 16px;\n    height: 16px;\n    border-radius: 3px;\n    background: rgba(25,32,45, 0.1);\n\n    ", ":focus + & {\n        box-shadow: 0 0 3px ", ";\n    }\n"])), HiddenCheckbox, function (props) {
+  return props.theme.colors.violet;
+});
+
+exports.VisibleCheckbox = VisibleCheckbox;
+},{"styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/Checkbox.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+var _checkboxStyles = require("./checkboxStyles");
+
+var _templateObject, _templateObject2;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var VisibleCheckboxIcon = (0, _styledComponents.default)(_checkboxStyles.VisibleCheckbox)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    background: ", ";\n"])), function (props) {
+  return props.checked ? '#5964E0' : 'rgba(25,32,45, 0.1)';
+});
+
+var Icon = _styledComponents.default.svg(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    visibility: ", ";\n"])), function (props) {
+  return props.checked ? 'visible' : 'hidden';
+});
+
+var Checkbox = function Checkbox(_ref) {
+  var checked = _ref.checked,
+      setFullTime = _ref.setFullTime;
+  return _react.default.createElement(_checkboxStyles.CheckboxContainer, null, _react.default.createElement(_checkboxStyles.HiddenCheckbox, {
+    type: "checkbox",
+    name: "full-time",
+    id: "search-full-time",
+    checked: checked,
+    onChange: function onChange() {
+      return setFullTime(!checked);
+    }
+  }), _react.default.createElement(VisibleCheckboxIcon, {
+    checked: checked
+  }, _react.default.createElement(Icon, {
+    checked: checked,
+    width: "15",
+    height: "12",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 15 12"
+  }, _react.default.createElement("path", {
+    d: "M1 6.57l3.572 3.572L13.714 1",
+    stroke: "#FFF",
+    strokeWidth: "2",
+    fill: "none",
+    fillRule: "evenodd"
+  }))));
+};
+
+var _default = Checkbox;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./checkboxStyles":"components/checkboxStyles/index.js"}],"components/Filters.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32386,7 +32300,9 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 var _styledCommon = require("./styledCommon");
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _Checkbox = _interopRequireDefault(require("./Checkbox"));
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32414,55 +32330,59 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var FiltersForm = _styledComponents.default.form(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    width: 100%;\n    padding: 0 ", ";\n    transform: translateY(-2em);\n    z-index: 10;\n\n    .first-form-section {\n        justify-content: space-between;\n    }\n\n    @media screen and (min-width: ", ") {\n        flex-direction: row;\n    }\n"])), function (props) {
+var FiltersForm = _styledComponents.default.form(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    width: 100%;\n    padding: 0 ", ";\n    transform: translateY(-3em);\n    z-index: 10;\n\n    .first-form-section {\n        justify-content: space-between;\n    }\n\n    @media screen and (min-width: ", ") {\n        flex-direction: row;\n    }\n"])), function (props) {
   return props.theme.padding.paddingMobile;
 }, function (props) {
   return props.theme.mediaQueries.above768;
 });
 
-var FormSection = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: flex;\n    width: 100%;\n    background: white;\n    border-radius: 6px;\n    padding: 1.5em;\n\n    @media screen and (min-width: ", ") {\n        width: auto;\n        padding: 0;\n        flex: 0 1 33%;\n    }\n"])), function (props) {
+var TitleSearch = (0, _styledComponents.default)(_styledCommon.FormSection)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    height: auto;\n\n    .mobile-filters-toggle {\n        display: flex;\n        align-items: center;\n    }\n\n    @media screen and (min-width: ", ") {\n        flex-direction: row-reverse;\n\n        .mobile-filters-toggle-btn {\n            display: none;\n        }\n\n        .mobile-filters-toggle {\n            height: auto;\n        }\n    }\n"])), function (props) {
+  return props.theme.mediaQueries.above768;
+});
+var LocationSearch = (0, _styledComponents.default)(_styledCommon.FormSection)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    border-bottom-left-radius: 0px;\n    border-bottom-right-radius: 0px;\n\n    .form-input {\n        padding: 0 0 0 1em;\n    }\n\n    @media screen and (min-width: ", ") {\n        width: 100%;\n        padding: 1.5em;\n    }\n"])), function (props) {
+  return props.theme.mediaQueries.above768;
+});
+var FullTimeSearch = (0, _styledComponents.default)(_styledCommon.FormSection)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    border-top-left-radius: 0px;\n    border-top-right-radius: 0px;\n    border-top: 1px solid rgba(110,128,152, 0.2);\n\n    .search-button {\n        align-self: center;\n        padding: 1.5em 0 0 0;\n        width: 100%;\n    }\n\n    div > label {\n        padding: 0 0 0 1em;\n        font-weight: 700;\n        word-break: keep-all;\n        color: ", ";\n    }\n\n    @media screen and (min-width: ", ") {\n        flex-direction: row;\n        align-items: center;\n    }\n"])), function (props) {
+  return props.theme.fontColorTitle;
+}, function (props) {
   return props.theme.mediaQueries.above768;
 });
 
-var TitleSearch = (0, _styledComponents.default)(FormSection)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    height: auto;\n\n    .mobile-filters-toggle {\n        display: flex;\n        align-items: center;\n    }\n\n    @media screen and (min-width: ", ") {\n        flex-direction: row-reverse;\n\n        .mobile-filters-toggle-btn {\n            display: none;\n        }\n\n        .mobile-filters-toggle {\n            height: auto;\n        }\n    }\n"])), function (props) {
-  return props.theme.mediaQueries.above768;
-});
-var LocationSearch = (0, _styledComponents.default)(FormSection)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    border-bottom-left-radius: 0px;\n    border-bottom-right-radius: 0px;\n\n    .form-input {\n        padding: 0 0 0 1em;\n    }\n\n    @media screen and (min-width: ", ") {\n        width: 100%;\n        padding: 1.5em;\n    }\n"])), function (props) {
-  return props.theme.mediaQueries.above768;
-});
-var FullTimeSearch = (0, _styledComponents.default)(FormSection)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    border-top-left-radius: 0px;\n    border-top-right-radius: 0px;\n    border-top: 1px solid rgba(110,128,152, 0.2);\n\n    .search-button {\n        align-self: center;\n        padding: 1.5em 0 0 0;\n        width: 100%;\n    }\n\n    label {\n        padding: 0 0 0 1em;\n        font-weight: 700;\n        word-break: keep-all;\n    }\n\n    @media screen and (min-width: ", ") {\n        flex-direction: row;\n        align-items: center;\n    }\n"])), function (props) {
-  return props.theme.mediaQueries.above768;
-});
-
-var InputForm = _styledComponents.default.input(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    font-family: ", ";\n    font-size: ", ";\n    border: none;\n\n    &:placeholder {\n        font-family: ", ";\n        color: ", ";\n    }\n\n    #search-full-time {\n        padding: .3em;\n        background: ", ";\n    }\n"])), function (props) {
+var InputForm = _styledComponents.default.input(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    font-family: ", ";\n    font-size: ", ";\n    border: none;\n    background: ", ";\n    color: ", ";\n\n    &::placeholder {\n        font-family: ", ";\n        color: ", ";\n    }\n\n    /* #search-full-time {\n        padding: .3em;\n        background: ", ";\n    } */\n"])), function (props) {
   return props.theme.fonts.fontStack;
 }, function (props) {
   return props.theme.fontSizes.sizeP;
 }, function (props) {
+  return props.theme.boxes;
+}, function (props) {
+  return props.theme.fontColorText;
+}, function (props) {
   return props.theme.fonts.fontStack;
 }, function (props) {
-  return props.theme.colors.veryDarkBlue;
+  return props.theme.fontColorText;
 }, function (props) {
   return props.theme.colors.violet;
 });
 
-var SubmitBtn = _styledComponents.default.button(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    background: ", ";\n    border: none;\n    border-radius: 6px;\n    height: 48px;\n    width: 48px;\n    margin: 0 auto 0 1em;\n    cursor: pointer;\n\n    svg > path{\n        fill: white;\n    }\n\n    @media screen and (min-width: ", ") {\n        background: white;\n        width: auto;\n        height: auto;\n        margin: 0 1em 0 0;\n\n        svg > path {\n            fill: ", ";\n        }\n    }\n"])), function (props) {
+var SubmitBtn = _styledComponents.default.button(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    background: ", ";\n    border: none;\n    border-radius: 6px;\n    height: 48px;\n    width: 48px;\n    margin: 0 auto 0 1em;\n    cursor: pointer;\n\n    svg > path{\n        fill: white;\n    }\n\n    @media screen and (min-width: ", ") {\n        background: ", ";\n        width: auto;\n        height: auto;\n        margin: 0 1em 0 0;\n\n        svg > path {\n            fill: ", ";\n        }\n    }\n"])), function (props) {
   return props.theme.colors.violet;
 }, function (props) {
   return props.theme.mediaQueries.above768;
 }, function (props) {
+  return props.theme.boxes;
+}, function (props) {
   return props.theme.colors.violet;
 });
 
-var ApplyFiltersBtn = (0, _styledComponents.default)(_styledCommon.ButtonDark)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    width: 100%;\n    padding: 1em 0;\n    font-size: ", ";\n"])), function (props) {
+var ApplyFiltersBtn = (0, _styledComponents.default)(_styledCommon.ButtonDark)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    width: 100%;\n    padding: 1em 0;\n    font-size: ", ";\n"])), function (props) {
   return props.theme.fontSizes.sizeP;
 });
 
-var MobileWrapperFilters = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    background: rgba(0, 0, 0, 0.5);\n    position: absolute;\n    top: -150px;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    z-index: 1;\n    height: 200vh;\n    width: 100vw;\n\n    @media screen and (min-width: ", ") {\n        background: none;\n        height: 0;\n        width: 0;\n    }\n"])), function (props) {
+var MobileWrapperFilters = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    background: rgba(0, 0, 0, 0.5);\n    position: absolute;\n    top: -150px;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    z-index: 1;\n    height: 200vh;\n    width: 100vw;\n\n    @media screen and (min-width: ", ") {\n        background: none;\n        height: 0;\n        width: 0;\n    }\n"])), function (props) {
   return props.theme.mediaQueries.above768;
 });
 
-var MobileFilters = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    position: absolute;\n    width: 90%;\n    margin: auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    padding: 1.5em;\n    z-index: 3;\n\n    @media screen and (min-width: ", ") {\n        position: static;\n        background: none;\n        flex-direction: row;\n        padding: 0;\n    }\n"])), function (props) {
+var MobileFilters = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    position: absolute;\n    width: 90%;\n    margin: auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    padding: 1.5em;\n    z-index: 3;\n\n    @media screen and (min-width: ", ") {\n        position: static;\n        background: none;\n        flex-direction: row;\n        padding: 0;\n    }\n"])), function (props) {
   return props.theme.mediaQueries.above768;
 });
 
@@ -32504,15 +32424,7 @@ var Filters = function Filters(_ref) {
   var toggleMobileFilters = function toggleMobileFilters() {
     setMobileFilters(!mobileFilters);
     document.body.classList.toggle('scroll');
-  }; // const validateTitle = (userInput) => {
-  // }
-  // const searchByDescription = (e) => {
-  //     e.preventDefault();
-  //     setUserFilters({ ...userfilters, description: descriptionRef.current.value});
-  //     setDescription('');
-  //     addFilters({...userfilters, description: descriptionRef.current.value})
-  // }
-
+  };
 
   var searchRefined = function searchRefined(e) {
     e.preventDefault();
@@ -32532,11 +32444,11 @@ var Filters = function Filters(_ref) {
   };
 
   (0, _react.useEffect)(function () {
-    if (window.innerWidth > 600) {
+    if (window.innerWidth > 768) {
       setMobileFilters(true);
     }
   });
-  return _react.default.createElement(FiltersForm, {
+  return _react.default.createElement(_styledCommon.DesktopWrapper, null, _react.default.createElement(FiltersForm, {
     onSubmit: searchRefined
   }, _react.default.createElement(TitleSearch, {
     className: "first-form-section"
@@ -32605,27 +32517,21 @@ var Filters = function Filters(_ref) {
     onChange: function onChange(e) {
       return setLocation(e.target.value);
     }
-  })), _react.default.createElement(FullTimeSearch, null, _react.default.createElement("div", null, _react.default.createElement(InputForm, {
-    className: "form-input",
-    type: "checkbox",
-    name: "full-time",
-    id: "search-full-time",
-    checked: fullTime,
-    onChange: function onChange() {
-      return setFullTime(!fullTime);
-    }
-  }), _react.default.createElement("label", {
+  })), _react.default.createElement(FullTimeSearch, null, _react.default.createElement("div", null, _react.default.createElement("label", {
     htmlFor: "search-full-time"
-  }, "Full Time")), _react.default.createElement("div", {
+  }, "Full Time", _react.default.createElement(_Checkbox.default, {
+    checked: fullTime,
+    setFullTime: setFullTime
+  }))), _react.default.createElement("div", {
     className: "search-button"
   }, _react.default.createElement(ApplyFiltersBtn, {
     type: "submit"
-  }, "Search")))) : null);
+  }, "Search")))) : null));
 };
 
 var _default = Filters;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./styledCommon":"components/styledCommon/index.js"}],"components/useApiCall.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./styledCommon":"components/styledCommon/index.js","./Checkbox":"components/Checkbox.js"}],"components/useApiCall.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32780,17 +32686,17 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ResultsStyled = _styledComponents.default.ul(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    display: grid;\n    grid-template-columns: minmax(0, 1fr);\n    grid-auto-rows: 253px;\n    justify-content: space-between;\n    justify-items: center;\n    grid-row-gap: 3em;\n    grid-column-gap: 1em;\n    padding: 4em ", " 2em;\n\n    @media screen and (min-width: ", ") {\n        grid-template-columns: repeat(2, auto);\n        grid-row-gap: 3em;\n        padding: 4.5em ", " 2em;\n    }\n\n    @media screen and (min-width: ", ") {\n        grid-template-columns: repeat(3, auto);\n        padding: 4em 0;\n    }\n"])), function (props) {
+var ResultsStyled = _styledComponents.default.ul(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    display: grid;\n    grid-template-columns: minmax(0, 1fr);\n    grid-auto-rows: 253px;\n    justify-content: space-between;\n    justify-items: center;\n    grid-row-gap: 3em;\n    grid-column-gap: 1em;\n    padding: 1em ", " 2em;\n\n    @media screen and (min-width: ", ") {\n        grid-template-columns: repeat(2, auto);\n        grid-row-gap: 3em;\n        padding: 4.5em ", " 2em;\n    }\n\n    @media screen and (min-width: ", ") {\n        grid-template-columns: repeat(3, auto);\n        padding: 4em 0;\n    }\n"])), function (props) {
   return props.theme.padding.paddingMobile;
 }, function (props) {
-  return props.theme.mediaQueries.above600;
+  return props.theme.mediaQueries.above768;
 }, function (props) {
   return props.theme.padding.paddingTablet;
 }, function (props) {
   return props.theme.mediaQueries.above1300;
 });
 
-var DesktopWrapperResults = (0, _styledComponents.default)(_index.DesktopWrapper)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    height: 100%;\n"])));
+var ButtonLoadMore = (0, _styledComponents.default)(_index.ButtonDark)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    padding: 1em 2.5em;\n"])));
 
 var Results = function Results(_ref) {
   var isSelected = _ref.isSelected,
@@ -32818,7 +32724,7 @@ var Results = function Results(_ref) {
     }));
   };
 
-  return _react.default.createElement("main", null, _react.default.createElement(_Filters.default, {
+  return _react.default.createElement(_index.DesktopWrapper, null, _react.default.createElement("main", null, _react.default.createElement(_Filters.default, {
     addFilters: addFilters
   }), _react.default.createElement(ResultsStyled, null, jobs.map(function (job) {
     return _react.default.createElement(_JobPosting.default, {
@@ -32827,12 +32733,321 @@ var Results = function Results(_ref) {
       isSelected: isSelected,
       selectJob: selectJob
     });
-  })), _react.default.createElement("button", null, "Load More"));
+  })), _react.default.createElement(ButtonLoadMore, null, "Load More")));
 };
 
 var _default = Results;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./JobPosting":"components/JobPosting.js","./Filters":"components/Filters.js","./useApiCall":"components/useApiCall.js","./styledCommon/index":"components/styledCommon/index.js"}],"components/Header.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./JobPosting":"components/JobPosting.js","./Filters":"components/Filters.js","./useApiCall":"components/useApiCall.js","./styledCommon/index":"components/styledCommon/index.js"}],"components/descriptionComponents/DescriptionHeader.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+var _styledCommon = require("../styledCommon");
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var DescriptionHeaderStyled = _styledComponents.default.section(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    padding: 2em 0;\n    background: ", ";\n    border-radius: 6px;\n    position: relative;\n    z-index: 2;\n    margin: -1em 0 0 0;\n\n    @media screen and (min-width: ", ") {\n        padding: 2.5em ", ";\n        flex-direction: row;\n        justify-content: space-between;\n        height: 140px;\n        margin: -2em 0 0 0;\n    }\n\n    @media screen and (min-width: ", ") {\n        padding: 2.5em ", ";\n    }\n"])), function (props) {
+  return props.theme.boxes;
+}, function (props) {
+  return props.theme.mediaQueries.above768;
+}, function (props) {
+  return props.theme.padding.paddingTablet;
+}, function (props) {
+  return props.theme.mediaQueries.above1300;
+}, function (props) {
+  return props.theme.padding.paddingDesktop;
+});
+
+var LogoWrapperHeader = (0, _styledComponents.default)(_styledCommon.LogoWrapper)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: absolute;\n    top: -2em;\n    margin: 0 auto;\n\n    @media screen and (min-width: ", ") {\n        top: 0;\n        left: 0;\n        bottom: 0;\n        width: 100%;\n        height: auto;\n        max-width: 140px;\n        border: none;\n        margin: 0;\n    }\n"])), function (props) {
+  return props.theme.mediaQueries.above768;
+});
+var LogoSmallHeader = (0, _styledComponents.default)(_styledCommon.LogoSmall)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    @media screen and (min-width: ", ") {\n        width: 140px;\n    }\n"])), function (props) {
+  return props.theme.mediaQueries.above768;
+});
+
+var CompanyName = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    text-align: center;\n    padding: 0 0 1em 0;\n    \n    h2 {\n        padding: 0 0 1em 0;\n    }\n\n    @media screen and (min-width: ", ") {\n        margin: 0 0 0 140px ;\n        text-align: left;\n        display: flex;\n        flex-direction: column;\n        justify-content: space-between;\n        padding: 0;\n        height: 100%;\n\n        h2 {\n            padding: 0;\n        }\n    }\n"])), function (props) {
+  return props.theme.mediaQueries.above768;
+});
+
+var CompanySiteBtn = (0, _styledComponents.default)(_styledCommon.ButtonLight)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    padding: 1em;\n    max-width: 150px;\n"])));
+
+var DescriptionHeader = function DescriptionHeader(_ref) {
+  var job = _ref.job;
+  return _react.default.createElement(_styledCommon.DesktopWrapper, null, _react.default.createElement(DescriptionHeaderStyled, null, _react.default.createElement(LogoWrapperHeader, null, _react.default.createElement(LogoSmallHeader, {
+    src: job.company_logo,
+    alt: "Logo"
+  })), _react.default.createElement(CompanyName, null, _react.default.createElement(_styledCommon.TitleH2, null, job.company), _react.default.createElement(_styledCommon.InfoSpan, null, job.company_url)), _react.default.createElement(CompanySiteBtn, null, _react.default.createElement("a", {
+    href: job.company_url
+  }, "Company site"))));
+};
+
+var _default = DescriptionHeader;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../styledCommon":"components/styledCommon/index.js"}],"components/descriptionComponents/DescriptionBody.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+var _styledCommon = require("../styledCommon");
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var DescriptionBodyStyled = _styledComponents.default.section(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    padding: 2em ", ";\n    background: ", ";\n    border-radius: 6px;\n    margin: 2em 0;\n\n    @media screen and (min-width: ", ") {\n        padding: 2em ", ";\n    }\n\n    @media screen and (min-width: ", ") {\n        padding: 2em ", ";\n    }\n"])), function (props) {
+  return props.theme.padding.paddingMobile;
+}, function (props) {
+  return props.theme.boxes;
+}, function (props) {
+  return props.theme.mediaQueries.above768;
+}, function (props) {
+  return props.theme.padding.paddingTablet;
+}, function (props) {
+  return props.theme.mediaQueries.above1300;
+}, function (props) {
+  return props.theme.padding.paddingDesktop;
+});
+
+var BodyMainInfo = _styledComponents.default.article(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    padding: 0 0 2em 0;\n\n    @media screen and (min-width: ", ") {\n        flex-direction: row;\n        justify-content: space-between;\n        align-items: center;\n    }\n"])), function (props) {
+  return props.theme.mediaQueries.above768;
+});
+
+var JobMainInfo = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    padding: 0 0 2em 0;\n\n    @media screen and (min-width: ", ") {\n        display: flex;\n        flex-direction: column;\n        justify-content: space-between;\n    }\n"])), function (props) {
+  return props.theme.mediaQueries.above768;
+});
+
+var ApplyNowBtn = (0, _styledComponents.default)(_styledCommon.ButtonDark)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    width: 100%;\n    max-width: 400px;\n    padding: 1em 0;\n\n    @media screen and (min-width: ", ") {\n        max-width: 140px;\n    }\n"])), function (props) {
+  return props.theme.mediaQueries.above768;
+});
+var BodyJobTitle = (0, _styledComponents.default)(_styledCommon.TitleH2)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    padding: 1em 0;\n"])));
+
+var BodyContent = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    color: ", ";\n    line-height: 1.5rem;\n\n    h1, h2, h3, h4 {\n        color: ", ";\n        padding: 1em 0;\n    }\n"])), function (props) {
+  return props.theme.fontColorText;
+}, function (props) {
+  return props.theme.fontColorTitle;
+});
+
+var DescriptionBody = function DescriptionBody(_ref) {
+  var job = _ref.job;
+  return _react.default.createElement(_styledCommon.DesktopWrapper, null, _react.default.createElement(DescriptionBodyStyled, null, _react.default.createElement(BodyMainInfo, null, _react.default.createElement(JobMainInfo, null, _react.default.createElement(_styledCommon.AdditionalInfo, null, _react.default.createElement(_styledCommon.AdditionalInfoChild, null, job.created_at), _react.default.createElement(_styledCommon.AdditionalInfoChild, null, job.type)), _react.default.createElement(BodyJobTitle, null, job.title), _react.default.createElement(_styledCommon.JobLocation, null, job.location)), _react.default.createElement(ApplyNowBtn, null, _react.default.createElement("a", {
+    href: job.how_to_apply
+  }, "Apply Now"))), _react.default.createElement(BodyContent, {
+    dangerouslySetInnerHTML: {
+      __html: job.description
+    }
+  })));
+};
+
+var _default = DescriptionBody;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../styledCommon":"components/styledCommon/index.js"}],"components/descriptionComponents/DescriptionHowToApply.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+var _styledCommon = require("../styledCommon");
+
+var _templateObject, _templateObject2, _templateObject3;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var HowToApply = _styledComponents.default.section(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    padding: 2rem ", ";\n    border-radius: 6px;\n    position: relative;\n    z-index: 1;\n    overflow: hidden;\n\n    &:before {\n        content: '';\n        position: absolute;\n        top: 0;\n        left: 0;\n        width: 100%;\n        height: 100%;\n        background: no-repeat url(\"data:image/svg+xml,%3Csvg width='327' height='372' fill='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 327 327'%3E%3Crect width='327' height='372' rx='6' fill='%235964E0'/%3E%3Cmask id='a' maskUnits='userSpaceOnUse' x='0' y='0' width='327' height='372'%3E%3Crect width='327' height='372' rx='6' fill='%23fff'/%3E%3C/mask%3E%3Cg mask='url(%23a)'%3E%3Cpath opacity='.081' fill-rule='evenodd' clip-rule='evenodd' d='M267.502 166.576c21.126-23.963 60.326-15.63 69.879 14.853l114.118 364.163c9.381 29.936-16.963 58.887-47.649 52.364L37.362 520.057c-30.685-6.522-42.976-43.685-22.23-67.217l252.37-286.264z' fill='%23fff'/%3E%3C/g%3E%3C/svg%3E\");\n        z-index: -1;\n\n        @media screen and (min-width: ", ") {\n            background: no-repeat url(\"data:image/svg+xml,%3Csvg width='730' height='261' fill='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 730 261'%3E%3Crect y='1' width='730' height='259' rx='6' fill='%235964E0'/%3E%3Cmask id='a' maskUnits='userSpaceOnUse' x='0' y='1' width='730' height='259'%3E%3Crect y='1' width='730' height='259' rx='6' fill='%23fff'/%3E%3C/mask%3E%3Cg mask='url(%23a)'%3E%3Cpath opacity='.081' fill-rule='evenodd' clip-rule='evenodd' d='M549.888-78.424c21.125-23.963 60.326-15.63 69.879 14.853l114.117 364.163c9.381 29.936-16.962 58.887-47.648 52.364l-366.488-77.899c-30.685-6.522-42.976-43.685-22.23-67.218l252.37-286.263z' fill='%23fff'/%3E%3C/g%3E%3C/svg%3E\");\n            background-color: ", ";\n        }\n    }\n\n    @media screen and (min-width: ", ") {\n        padding: 1em ", ";\n    }\n\n    @media screen and (min-width: ", ") {\n        padding: 1em ", ";\n    }\n"])), function (props) {
+  return props.theme.padding.paddingMobile;
+}, function (props) {
+  return props.theme.mediaQueries.above375;
+}, function (props) {
+  return props.theme.colors.violet;
+}, function (props) {
+  return props.theme.mediaQueries.above768;
+}, function (props) {
+  return props.theme.padding.paddingTablet;
+}, function (props) {
+  return props.theme.mediaQueries.above1300;
+}, function (props) {
+  return props.theme.padding.paddingDesktop;
+});
+
+var HowToApplyTitle = (0, _styledComponents.default)(_styledCommon.TitleH2)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    color: white;\n    padding: 1em 0;\n\n    @media screen and (min-width: ", ") {\n        padding: 0 0 1em 0;\n    }\n"])), function (props) {
+  return props.theme.mediaQueries.above375;
+});
+
+var HowToApplyLink = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    color: white;\n\n    a {\n        color: white;\n    }\n"])));
+
+var DescriptionHowToApply = function DescriptionHowToApply(_ref) {
+  var job = _ref.job;
+  return _react.default.createElement(_styledCommon.DesktopWrapper, null, _react.default.createElement(HowToApply, null, _react.default.createElement(HowToApplyTitle, null, "How to Apply"), _react.default.createElement(HowToApplyLink, {
+    dangerouslySetInnerHTML: {
+      __html: job.how_to_apply
+    }
+  })));
+};
+
+var _default = DescriptionHowToApply;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../styledCommon":"components/styledCommon/index.js"}],"components/descriptionComponents/DescriptionBtn.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+var _styledCommon = require("../styledCommon");
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var DescriptionFooterBtn = _styledComponents.default.section(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    position: absolute;\n    bottom: 0;\n    left: 0; \n    right: 0;\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    padding: ", ";\n    background: ", ";\n\n    @media screen and (min-width: ", ") {\n        justify-content: space-between;\n        padding: 1.5em ", ";\n    }\n"])), function (props) {
+  return props.theme.padding.paddingMobile;
+}, function (props) {
+  return props.theme.boxes;
+}, function (props) {
+  return props.theme.mediaQueries.above768;
+}, function (props) {
+  return props.theme.padding.paddingTablet;
+});
+
+var FooterTabletsDesktop = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: none;\n\n    @media screen and (min-width: ", ") {\n        display: flex;\n        flex-direction: column;\n        justify-content: space-between;\n    }\n"])), function (props) {
+  return props.theme.mediaQueries.above768;
+});
+
+var ApplyNowBtnFooter = (0, _styledComponents.default)(_styledCommon.ButtonDark)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    width: 100%;\n    max-width: 400px;\n    padding: 1em 0;\n\n    @media screen and (min-width: ", ") {\n        max-width: 140px;\n    }\n"])), function (props) {
+  return props.theme.mediaQueries.above768;
+});
+var TitleFooter = (0, _styledComponents.default)(_styledCommon.TitleH2)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    font-size: ", ";\n    padding: 0 0 1em 0;\n"])), function (props) {
+  return props.theme.fontSizes.sizeH3;
+});
+
+var DescriptionBtn = function DescriptionBtn(_ref) {
+  var job = _ref.job;
+  return _react.default.createElement(DescriptionFooterBtn, null, _react.default.createElement(FooterTabletsDesktop, null, _react.default.createElement(TitleFooter, null, job.title), _react.default.createElement(_styledCommon.InfoSpan, null, job.company)), _react.default.createElement(ApplyNowBtnFooter, null, _react.default.createElement("a", {
+    href: job.how_to_apply
+  }, "Apply Now")));
+};
+
+var _default = DescriptionBtn;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../styledCommon":"components/styledCommon/index.js"}],"components/JobDescription.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+var _DescriptionHeader = _interopRequireDefault(require("./descriptionComponents/DescriptionHeader"));
+
+var _DescriptionBody = _interopRequireDefault(require("./descriptionComponents/DescriptionBody"));
+
+var _DescriptionHowToApply = _interopRequireDefault(require("./descriptionComponents/DescriptionHowToApply"));
+
+var _DescriptionBtn = _interopRequireDefault(require("./descriptionComponents/DescriptionBtn"));
+
+var _templateObject;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var DescriptionWrapper = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    padding: 0 ", " 8em;\n    position: relative;\n"])), function (props) {
+  return props.theme.padding.paddingMobile;
+});
+
+var JobDescription = function JobDescription(_ref) {
+  var isSelected = _ref.isSelected,
+      currentJob = _ref.currentJob;
+  return _react.default.createElement(DescriptionWrapper, null, _react.default.createElement(_DescriptionHeader.default, {
+    job: currentJob
+  }), _react.default.createElement(_DescriptionBody.default, {
+    job: currentJob
+  }), _react.default.createElement(_DescriptionHowToApply.default, {
+    job: currentJob
+  }), _react.default.createElement(_DescriptionBtn.default, {
+    job: currentJob
+  }));
+};
+
+var _default = JobDescription;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./descriptionComponents/DescriptionHeader":"components/descriptionComponents/DescriptionHeader.js","./descriptionComponents/DescriptionBody":"components/descriptionComponents/DescriptionBody.js","./descriptionComponents/DescriptionHowToApply":"components/descriptionComponents/DescriptionHowToApply.js","./descriptionComponents/DescriptionBtn":"components/descriptionComponents/DescriptionBtn.js"}],"components/headerToggle/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ToggleButton = exports.SliderSpan = exports.ToggleLabel = exports.ToggleSwitchContainer = void 0;
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var ToggleSwitchContainer = _styledComponents.default.fieldset(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    display: flex;\n    width: auto;\n    align-items: center;\n"])));
+
+exports.ToggleSwitchContainer = ToggleSwitchContainer;
+
+var ToggleLabel = _styledComponents.default.label(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: relative;\n    display: inline-block;\n    width: 48px;\n    height: 24px;\n"])));
+
+exports.ToggleLabel = ToggleLabel;
+
+var SliderSpan = _styledComponents.default.span(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    position: absolute;\n    cursor: pointer;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: ", ";\n    transition: 400ms;\n    border-radius: 34px;\n\n    &:before {\n        content: '';\n        position: absolute;\n        height: 18px;\n        width: 18px;\n        left: 3px;\n        bottom: 3px;\n        background: white;\n        transition: 400ms;\n        border-radius: 50%;\n    }  \n"])), function (props) {
+  return props.theme.colors.violet;
+});
+
+exports.SliderSpan = SliderSpan;
+
+var ToggleButton = _styledComponents.default.input.attrs({
+  type: 'checkbox'
+})(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    opacity: 0;\n    width: 30px;\n    height: 30px;\n\n    &:checked + ", " {\n        background: ", ";\n    }\n\n    &:focus + ", " {\n        box-shadow: 0 0 1px red;\n    }\n\n    &:checked + ", ":before {\n        transform: translateX(26px);\n    }\n"])), SliderSpan, function (props) {
+  return props.theme.colors.violet;
+}, SliderSpan, SliderSpan);
+
+exports.ToggleButton = ToggleButton;
+},{"styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/Header.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32846,7 +33061,9 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 var _index = require("./styledCommon/index");
 
-var _templateObject, _templateObject2;
+var _headerToggle = require("./headerToggle");
+
+var _templateObject, _templateObject2, _templateObject3;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32864,8 +33081,12 @@ var HeaderStyled = _styledComponents.default.header(_templateObject || (_templat
 
 var HeaderContent = (0, _styledComponents.default)(_index.DesktopWrapper)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: space-between;\n"])));
 
-var Header = function Header() {
-  return _react.default.createElement(HeaderStyled, null, _react.default.createElement(HeaderContent, null, _react.default.createElement("h1", null, _react.default.createElement("a", {
+var IconToggle = _styledComponents.default.svg(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    &:first-of-type {\n        margin: 0 1em 0 0;\n    }\n\n    &:last-of-type {\n        margin: 0 0 0 1em;\n    }\n"])));
+
+var Header = function Header(_ref) {
+  var toggleTheme = _ref.toggleTheme,
+      theme = _ref.theme;
+  return _react.default.createElement(HeaderStyled, null, _react.default.createElement(_index.DesktopWrapper, null, _react.default.createElement(HeaderContent, null, _react.default.createElement("h1", null, _react.default.createElement("a", {
     href: "/"
   }, _react.default.createElement("svg", {
     width: "115",
@@ -32876,10 +33097,7 @@ var Header = function Header() {
     d: "M7.612 24.08c1.022 0 1.967-.178 2.838-.531a6.998 6.998 0 002.29-1.498l.109 1.711h4.252V0h-4.502v9.49a7.369 7.369 0 00-2.251-1.387 7.394 7.394 0 00-2.736-.499c-1.458 0-2.764.356-3.915 1.07-1.152.712-2.056 1.689-2.712 2.93C.328 12.844 0 14.257 0 15.842c0 1.584.328 2.996.985 4.237.656 1.241 1.56 2.218 2.712 2.93 1.151.714 2.457 1.07 3.915 1.07zm1.017-3.961c-1.147 0-2.095-.407-2.845-1.22s-1.126-1.832-1.126-3.057c0-1.225.375-2.245 1.126-3.058.75-.813 1.698-1.22 2.845-1.22 1.146 0 2.094.407 2.844 1.22s1.126 1.833 1.126 3.058c0 1.225-.375 2.244-1.126 3.057-.75.813-1.698 1.22-2.844 1.22zm20.258 3.96c1.084 0 2.217-.18 3.4-.538 1.182-.36 2.378-1.02 3.587-1.98l-2.72-3.296a7.804 7.804 0 01-1.946 1.37c-.714.354-1.613.531-2.696.531-1.011 0-1.894-.274-2.65-.823a4.154 4.154 0 01-1.555-2.139h12.192v-1.378c0-1.595-.354-3.01-1.063-4.246a7.772 7.772 0 00-2.9-2.915c-1.224-.707-2.623-1.061-4.196-1.061-1.584 0-2.999.356-4.244 1.07a7.897 7.897 0 00-2.947 2.914c-.719 1.23-1.078 2.632-1.078 4.206 0 1.595.375 3.018 1.125 4.27.75 1.25 1.787 2.233 3.11 2.946 1.324.713 2.85 1.07 4.58 1.07zm2.985-9.41h-7.659a4.047 4.047 0 011.383-2.233c.704-.581 1.535-.872 2.494-.872.948 0 1.76.286 2.438.856.677.57 1.126 1.32 1.344 2.25zm16.273 9.093l6.174-15.841h-4.736l-2.61 7.715a23.244 23.244 0 00-.509 1.774c-.193.76-.351 1.452-.477 2.075h-.062a32.377 32.377 0 00-.43-2.09c-.182-.772-.346-1.358-.492-1.76l-2.83-7.714h-4.892l6.487 15.841h4.377zM58.399 5.07c.75 0 1.355-.232 1.813-.697.459-.464.688-1.077.688-1.837s-.23-1.373-.688-1.838C59.754.232 59.149 0 58.399 0s-1.355.232-1.813.697c-.459.465-.688 1.077-.688 1.838 0 .76.229 1.373.688 1.837.458.465 1.062.697 1.813.697zM54.882 32c1.865 0 3.293-.504 4.283-1.513.99-1.008 1.485-2.453 1.485-4.333V7.921h-4.502v17.71c0 .75-.237 1.34-.711 1.767-.474.428-1.076.642-1.806.642-.542 0-1.1-.122-1.672-.365v3.739c.99.39 1.964.586 2.923.586zm16.835-7.92c1.605 0 3.032-.357 4.283-1.07a7.903 7.903 0 002.962-2.93c.724-1.242 1.086-2.654 1.086-4.238 0-1.585-.362-2.997-1.086-4.238A7.903 7.903 0 0076 8.674c-1.25-.714-2.678-1.07-4.283-1.07-1.605 0-3.035.356-4.291 1.07a7.887 7.887 0 00-2.97 2.93c-.724 1.24-1.086 2.653-1.086 4.238 0 1.584.362 2.996 1.086 4.237a7.887 7.887 0 002.97 2.93c1.256.714 2.686 1.07 4.29 1.07zm0-3.961c-1.147 0-2.095-.407-2.845-1.22s-1.126-1.832-1.126-3.057c0-1.225.376-2.245 1.126-3.058.75-.813 1.698-1.22 2.845-1.22 1.146 0 2.094.407 2.845 1.22.75.813 1.125 1.833 1.125 3.058 0 1.225-.375 2.244-1.125 3.057-.75.813-1.699 1.22-2.845 1.22zm20.79 3.96c1.469 0 2.777-.356 3.923-1.07 1.146-.712 2.048-1.689 2.704-2.93.657-1.24.985-2.653.985-4.237 0-1.585-.328-2.997-.985-4.238-.656-1.241-1.558-2.218-2.704-2.93-1.146-.714-2.454-1.07-3.924-1.07-.98 0-1.89.166-2.735.499a7.369 7.369 0 00-2.251 1.386V0h-4.502v23.762h4.252l.11-1.71a6.978 6.978 0 002.297 1.497c.876.353 1.819.53 2.83.53zm-1.017-3.96c-1.146 0-2.094-.407-2.844-1.22s-1.126-1.832-1.126-3.057c0-1.225.375-2.245 1.126-3.058.75-.813 1.698-1.22 2.844-1.22 1.147 0 2.095.407 2.845 1.22s1.126 1.833 1.126 3.058c0 1.225-.375 2.244-1.126 3.057-.75.813-1.698 1.22-2.845 1.22zm17.304 3.96c1.136 0 2.173-.198 3.111-.594.938-.396 1.688-.969 2.25-1.719.564-.75.845-1.642.845-2.677 0-1.035-.263-1.872-.79-2.51a5.958 5.958 0 00-1.93-1.537c-.76-.386-1.5-.721-2.22-1.006a18.284 18.284 0 01-1.727-.777c-.484-.253-.727-.575-.727-.966 0-.348.175-.583.524-.705.35-.121.67-.182.961-.182.511 0 1.134.119 1.868.356.735.238 1.332.51 1.79.816l1.985-3.47a9.31 9.31 0 00-2.837-1.148 13.27 13.27 0 00-2.962-.356c-1.917 0-3.4.433-4.447 1.299-1.047.866-1.571 1.97-1.571 3.31 0 .972.247 1.765.742 2.377a5.807 5.807 0 001.845 1.497 28.35 28.35 0 002.196 1.038c.688.285 1.295.575 1.821.871.526.296.79.681.79 1.156 0 .328-.141.597-.422.808-.282.212-.652.317-1.11.317-.594 0-1.269-.177-2.025-.53-.755-.354-1.58-.832-2.477-1.434l-2.126 3.437c1.053.793 2.155 1.379 3.306 1.759 1.152.38 2.264.57 3.337.57z",
     fill: "#FFF",
     fillRule: "nonzero"
-  })))), _react.default.createElement("fieldset", null, _react.default.createElement("label", {
-    htmlFor: "light-mode",
-    className: "switch-color-mode"
-  }, _react.default.createElement("svg", {
+  })))), _react.default.createElement(_headerToggle.ToggleSwitchContainer, null, _react.default.createElement(IconToggle, {
     width: "20",
     height: "19",
     xmlns: "http://www.w3.org/2000/svg",
@@ -32888,20 +33106,18 @@ var Header = function Header() {
     d: "M10 15.635c.33 0 .612.295.612.639v1.89c0 .344-.282.638-.612.638s-.612-.294-.612-.638v-1.89c0-.344.282-.639.612-.639zm-4.488-1.783c.27.262.27.68 0 .941L4.03 16.231a.698.698 0 01-.97 0 .649.649 0 010-.941l1.482-1.438c.27-.261.7-.261.97 0zm9.946 0l1.483 1.438c.27.261.27.68 0 .941a.698.698 0 01-.97 0l-1.483-1.438a.649.649 0 010-.94c.242-.262.674-.262.97 0zM10 4.552c1.396 0 2.685.525 3.598 1.4.913.85 1.504 2.05 1.504 3.35 0 1.3-.59 2.5-1.504 3.35a5.314 5.314 0 01-3.598 1.4c-1.396 0-2.685-.525-3.598-1.4-.913-.85-1.504-2.05-1.504-3.35 0-1.3.564-2.5 1.504-3.35A5.314 5.314 0 0110 4.552zM2.607 8.906c.355 0 .658.274.658.594 0 .32-.303.594-.658.594H.658C.304 10.094 0 9.82 0 9.5c0-.32.304-.594.658-.594h1.95zm16.735 0c.354 0 .658.274.658.594 0 .32-.304.594-.658.594h-1.95c-.354 0-.657-.274-.657-.594 0-.32.303-.594.658-.594h1.949zM4.03 2.77l1.482 1.438c.27.261.27.68 0 .94-.242.262-.674.262-.97 0L3.059 3.71a.649.649 0 010-.941c.27-.261.701-.261.97 0zm12.91 0c.27.261.27.68 0 .941l-1.482 1.438a.698.698 0 01-.97 0 .649.649 0 010-.941l1.482-1.438c.27-.261.701-.261.97 0zM10 .198c.33 0 .612.294.612.638v1.89c0 .344-.282.639-.612.639s-.612-.295-.612-.639V.836c0-.344.282-.638.612-.638z",
     fill: "#FFF",
     fillRule: "nonzero"
-  }))), _react.default.createElement("input", {
-    type: "radio",
+  })), _react.default.createElement(_headerToggle.ToggleLabel, {
+    htmlFor: "light-mode",
+    className: "switch-color-mode"
+  }, _react.default.createElement(_headerToggle.ToggleButton, {
     name: "color-switch",
-    id: "light-mode",
-    value: "light-mode"
-  }), _react.default.createElement("input", {
-    type: "radio",
-    name: "color-switch",
-    id: "dark-mode",
-    value: "dark-mode"
-  }), _react.default.createElement("label", {
-    htmlFor: "dark-mode",
-    className: "dark-mode"
-  }, _react.default.createElement("svg", {
+    id: "light-dark-mode",
+    checked: theme,
+    onChange: function onChange() {
+      toggleTheme(theme);
+      console.log(theme);
+    }
+  }), _react.default.createElement(_headerToggle.SliderSpan, null)), _react.default.createElement(IconToggle, {
     width: "12",
     height: "12",
     xmlns: "http://www.w3.org/2000/svg",
@@ -32915,7 +33131,7 @@ var Header = function Header() {
 
 var _default = Header;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./styledCommon/index":"components/styledCommon/index.js"}],"components/theme/globalStyles.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./styledCommon/index":"components/styledCommon/index.js","./headerToggle":"components/headerToggle/index.js"}],"components/theme/globalStyles.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32962,6 +33178,7 @@ var _default = {
     sizeP: '16px'
   },
   mediaQueries: {
+    above375: '376px',
     above600: '600px',
     above768: '768px',
     above1300: '1300px'
@@ -32973,6 +33190,31 @@ var _default = {
   }
 };
 exports.default = _default;
+},{}],"components/theme/darkMode.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.darkTheme = exports.lightTheme = void 0;
+var lightTheme = {
+  mainBackground: '#F2F2F2',
+  boxes: '#FFFFFF',
+  fontColorTitles: '#19202D',
+  fontColorText: '#9DAEC2',
+  buttonLightBox: 'rgba(89,100,224, 0.1)',
+  buttonLightText: '#5964E0'
+};
+exports.lightTheme = lightTheme;
+var darkTheme = {
+  mainBackground: '#121721',
+  boxes: '#19202D',
+  fontColorTitles: '#FFFFFF',
+  fontColorText: '#6E8098',
+  buttonLightBox: 'rgba(25,32,45, 0.7)',
+  buttonLightText: '#FFFFFF'
+};
+exports.darkTheme = darkTheme;
 },{}],"App.js":[function(require,module,exports) {
 "use strict";
 
@@ -32992,7 +33234,7 @@ var _globalStyles = _interopRequireDefault(require("./components/theme/globalSty
 
 var _theme = _interopRequireDefault(require("./components/theme/theme"));
 
-var _styledCommon = require("./components/styledCommon");
+var _darkMode = require("./components/theme/darkMode");
 
 var _templateObject;
 
@@ -33017,7 +33259,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var AppWrapper = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    background: ", ";\n    min-height: 100vh;\n"])), function (props) {
-  return props.theme.colors.lightGrey;
+  return props.theme.mainBackground;
 });
 
 function App() {
@@ -33031,6 +33273,11 @@ function App() {
       currentJob = _useState4[0],
       setCurrentJob = _useState4[1];
 
+  var _useState5 = (0, _react.useState)('dark'),
+      _useState6 = _slicedToArray(_useState5, 2),
+      theme = _useState6[0],
+      setTheme = _useState6[1];
+
   var displayDescription = function displayDescription() {
     setIsSelected(!isSelected);
   };
@@ -33039,7 +33286,16 @@ function App() {
     setCurrentJob(job);
   };
 
-  return _react.default.createElement(AppWrapper, null, _react.default.createElement(_styledCommon.DesktopWrapper, null, _react.default.createElement(_Header.default, null), isSelected ? _react.default.createElement(_JobDescription.default, {
+  var toggleTheme = function toggleTheme(choice) {
+    choice === true ? setTheme('light') : setTheme('dark');
+  };
+
+  return _react.default.createElement(_styledComponents.ThemeProvider, {
+    theme: theme === 'light' ? _darkMode.lightTheme : _darkMode.darkTheme
+  }, _react.default.createElement(AppWrapper, null, _react.default.createElement(_Header.default, {
+    toggleTheme: toggleTheme,
+    theme: theme
+  }), isSelected ? _react.default.createElement(_JobDescription.default, {
     isSelected: displayDescription,
     currentJob: currentJob
   }) : _react.default.createElement(_Results.default, {
@@ -33051,7 +33307,7 @@ function App() {
 _reactDom.default.render(_react.default.createElement(_styledComponents.ThemeProvider, {
   theme: _theme.default
 }, _react.default.createElement(_globalStyles.default, null), _react.default.createElement(App, null)), document.getElementById('root'));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./components/Results":"components/Results.js","./components/JobDescription":"components/JobDescription.js","./components/Header":"components/Header.js","./components/theme/globalStyles":"components/theme/globalStyles.js","./components/theme/theme":"components/theme/theme.js","./components/styledCommon":"components/styledCommon/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./components/Results":"components/Results.js","./components/JobDescription":"components/JobDescription.js","./components/Header":"components/Header.js","./components/theme/globalStyles":"components/theme/globalStyles.js","./components/theme/theme":"components/theme/theme.js","./components/theme/darkMode":"components/theme/darkMode.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -33079,7 +33335,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52664" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49408" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
