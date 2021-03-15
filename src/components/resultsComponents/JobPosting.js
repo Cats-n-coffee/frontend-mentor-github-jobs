@@ -1,18 +1,23 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import { LogoSmall, TitleH2, InfoSpan, LogoWrapper, AdditionalInfoChild, JobLocation, AdditionalInfo } from './styledCommon/index'
-import { formatDate } from './helperFunctions'
+import { LogoSmall, TitleH2, InfoSpan, LogoWrapper, AdditionalInfoChild, JobLocation, AdditionalInfo } from '../styledCommon/index'
+import { formatDate } from '../helperFunctions'
 
 const JobCard = styled.li`
     min-width: 300px;
     display: flex;
     max-width: 350px;
+    width: 100%;
     flex-direction: column;
     background: ${ (props) => props.theme.boxes};
     padding: 3em 2em 2em;
     border-radius: 6px;
     position: relative;
+
+    @media screen and (min-width: ${ (props) => props.theme.mediaQueries.above768}) {
+        min-width: 350px;
+    }
 `;
 
 const LogoWrapperCard = styled(LogoWrapper)`

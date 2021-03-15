@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { CheckboxContainer, HiddenCheckbox, VisibleCheckbox } from './checkboxStyles'
+import { CheckboxContainer, HiddenCheckbox, VisibleCheckbox } from '../checkboxStyles'
 
 const VisibleCheckboxIcon = styled(VisibleCheckbox)`
     background: ${ (props) => props.checked ? '#5964E0' : props.theme.fullTimeBox };

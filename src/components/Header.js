@@ -35,7 +35,7 @@ const HeaderStyled = styled.header`
     
 
     @media screen and (min-width: ${(props) => props.theme.mediaQueries.above600}) {
-        border-bottom-left-radius: 70px;
+        border-bottom-left-radius: 100px;
         padding: 3em ${(props) => props.theme.padding.paddingTablet} 4.5em;
     }
 `;

@@ -32197,7 +32197,7 @@ var formatUrl = function formatUrl(urlString) {
 };
 
 exports.formatUrl = formatUrl;
-},{}],"components/JobPosting.js":[function(require,module,exports) {
+},{}],"components/resultsComponents/JobPosting.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32209,9 +32209,9 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _index = require("./styledCommon/index");
+var _index = require("../styledCommon/index");
 
-var _helperFunctions = require("./helperFunctions");
+var _helperFunctions = require("../helperFunctions");
 
 var _templateObject, _templateObject2, _templateObject3;
 
@@ -32223,8 +32223,10 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var JobCard = _styledComponents.default.li(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    min-width: 300px;\n    display: flex;\n    max-width: 350px;\n    flex-direction: column;\n    background: ", ";\n    padding: 3em 2em 2em;\n    border-radius: 6px;\n    position: relative;\n"])), function (props) {
+var JobCard = _styledComponents.default.li(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    min-width: 300px;\n    display: flex;\n    max-width: 350px;\n    width: 100%;\n    flex-direction: column;\n    background: ", ";\n    padding: 3em 2em 2em;\n    border-radius: 6px;\n    position: relative;\n\n    @media screen and (min-width: ", ") {\n        min-width: 350px;\n    }\n"])), function (props) {
   return props.theme.boxes;
+}, function (props) {
+  return props.theme.mediaQueries.above768;
 });
 
 var LogoWrapperCard = (0, _styledComponents.default)(_index.LogoWrapper)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: absolute;\n    margin: -4.5em 0 0 0;\n"])));
@@ -32253,7 +32255,7 @@ var JobPosting = function JobPosting(_ref) {
 
 var _default = JobPosting;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./styledCommon/index":"components/styledCommon/index.js","./helperFunctions":"components/helperFunctions/index.js"}],"components/filtersStyles/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../styledCommon/index":"components/styledCommon/index.js","../helperFunctions":"components/helperFunctions/index.js"}],"components/filtersStyles/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32389,7 +32391,7 @@ var VisibleCheckbox = _styledComponents.default.div(_templateObject3 || (_templa
 });
 
 exports.VisibleCheckbox = VisibleCheckbox;
-},{"styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/Checkbox.js":[function(require,module,exports) {
+},{"styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/filtersComponents/Checkbox.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32401,7 +32403,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _checkboxStyles = require("./checkboxStyles");
+var _checkboxStyles = require("../checkboxStyles");
 
 var _templateObject, _templateObject2;
 
@@ -32447,7 +32449,7 @@ var Checkbox = function Checkbox(_ref) {
 
 var _default = Checkbox;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./checkboxStyles":"components/checkboxStyles/index.js"}],"components/Filters.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../checkboxStyles":"components/checkboxStyles/index.js"}],"components/filtersComponents/Filters.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32459,9 +32461,9 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _styledCommon = require("./styledCommon");
+var _styledCommon = require("../styledCommon");
 
-var _filtersStyles = require("./filtersStyles");
+var _filtersStyles = require("../filtersStyles");
 
 var _Checkbox = _interopRequireDefault(require("./Checkbox"));
 
@@ -32529,6 +32531,17 @@ var Filters = function Filters(_ref) {
     document.body.classList.toggle('scroll');
   };
 
+  var searchTitle = function searchTitle(e) {
+    e.preventDefault();
+    setUserFilters(_objectSpread(_objectSpread({}, userfilters), {}, {
+      description: descriptionRef.current.value
+    }));
+    setDescription('');
+    addFilters(_objectSpread(_objectSpread({}, userfilters), {}, {
+      description: descriptionRef.current.value
+    }));
+  };
+
   var searchRefined = function searchRefined(e) {
     e.preventDefault();
     setUserFilters(_objectSpread(_objectSpread({}, userfilters), {}, {
@@ -32544,6 +32557,11 @@ var Filters = function Filters(_ref) {
       location: locationRef.current.value,
       full_time: fullTime
     }));
+
+    if (window.innerWidth < 768 && mobileFilters === true) {
+      setMobileFilters(false);
+      document.body.classList.toggle('scroll');
+    }
   };
 
   (0, _react.useEffect)(function () {
@@ -32584,8 +32602,9 @@ var Filters = function Filters(_ref) {
     fill: "#6E8098",
     fillRule: "nonzero"
   })), _react.default.createElement(_filtersStyles.SubmitBtnMobileOnly, {
-    type: "submit",
-    className: "search-title-button"
+    type: "button",
+    className: "search-title-button",
+    onClick: searchTitle
   }, _react.default.createElement("svg", {
     width: "24",
     height: "24",
@@ -32636,7 +32655,7 @@ var Filters = function Filters(_ref) {
 
 var _default = Filters;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./styledCommon":"components/styledCommon/index.js","./filtersStyles":"components/filtersStyles/index.js","./Checkbox":"components/Checkbox.js"}],"components/useApiCall.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../styledCommon":"components/styledCommon/index.js","../filtersStyles":"components/filtersStyles/index.js","./Checkbox":"components/filtersComponents/Checkbox.js"}],"components/useApiCall.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32658,11 +32677,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function useApiCall(_ref) {
-  var description = _ref.description,
-      location = _ref.location,
-      full_time = _ref.full_time;
-
+function useApiCall(filters, page) {
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       jobs = _useState2[0],
@@ -32678,45 +32693,28 @@ function useApiCall(_ref) {
       error = _useState6[0],
       setError = _useState6[1];
 
+  var description = filters.description;
+  var location = filters.location;
+  var full_time = filters.full_time;
   var urlTemplate = "https://cors.bridged.cc/https://jobs.github.com/positions.json";
-  var descriptionParam = "";
-  var locationParam = "";
-  var fullTimeParam = "";
+  var params = Object.keys(filters).map(function (key) {
+    if (filters[key] === '') {
+      delete filters[key];
+    }
 
-  if (description !== '' && /^[A-Za-z]+$/.test(description)) {
-    descriptionParam = "description=".concat(description);
-  }
+    if (filters[key] === false) {
+      delete filters[key];
+    }
 
-  if (location !== '') {
-    locationParam = "location=".concat(location);
-  }
+    if (filters[key] === true) {
+      filters[key] = 'on';
+    }
 
-  if (full_time !== false) {
-    console.log(full_time);
-    fullTimeParam = "full_time=on";
-  }
-
-  if (descriptionParam !== '' && locationParam === '') {
-    urlTemplate += "?".concat(descriptionParam);
-  }
-
-  if (descriptionParam === '' && locationParam !== '') {
-    urlTemplate += "?".concat(locationParam);
-  }
-
-  if (descriptionParam !== '' && locationParam !== '') {
-    urlTemplate += "?".concat(descriptionParam, "&").concat(locationParam);
-  }
-
-  if (descriptionParam === '' && locationParam === '' && fullTimeParam !== '') {
-    urlTemplate += "?".concat(fullTimeParam);
-  }
-
-  if ((descriptionParam !== '' || locationParam !== '') && fullTimeParam !== '') {
-    urlTemplate += "&".concat(fullTimeParam);
-  }
-
-  console.log(urlTemplate);
+    return encodeURI(key) + '=' + encodeURI(filters[key]);
+  }).join('&');
+  params = "?".concat(params);
+  urlTemplate = "".concat(urlTemplate).concat(params, "&page=").concat(page);
+  console.log(urlTemplate, 'page', page);
   (0, _react.useEffect)(function () {
     fetch(urlTemplate).then(function (res) {
       if (!res.ok) {
@@ -32733,7 +32731,7 @@ function useApiCall(_ref) {
       setIsPending(false);
       setError(err.message);
     });
-  }, [description, location, full_time]);
+  }, [description, location, full_time, page]);
   return {
     jobs: jobs,
     isPending: isPending,
@@ -32743,7 +32741,7 @@ function useApiCall(_ref) {
 
 var _default = useApiCall;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"components/Spinner.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"components/resultsComponents/Spinner.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32755,7 +32753,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+var _templateObject, _templateObject2, _templateObject3;
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -32765,13 +32763,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var SpinningAnimation = (0, _styledComponents.keyframes)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }\n    100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }\n"])));
+var SpinningAnimation = (0, _styledComponents.keyframes)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    0% { transform: rotate(0deg); }\n    100% { transform: rotate(360deg); }\n"])));
 
-var SpinnerScreen = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n"])));
+var SpinnerScreen = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    height: 50vh;\n    width: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n"])));
 
-var SpinnerElement = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    height: 100px;\n    width: 100px;\n    border: 1px solid black;\n    display: flex;\n    border-radius: 50%;\n    position: relative;\n"])));
-
-var SpinnerCircle = _styledComponents.default.span(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    height: 50px;\n    width: 50px;\n    border-radius: 50%;\n    border-top: 5px solid ", ";\n    border: 5px solid white;\n    animation: 1s linear infinite ", ";\n"])), function (props) {
+var SpinnerCircle = _styledComponents.default.span(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    height: 70px;\n    width: 70px;\n    border-radius: 50%;\n    border: 5px solid white;\n    border-top: 5px solid ", ";\n    animation: 1s linear infinite ", ";\n"])), function (props) {
   return props.theme.colors.violet;
 }, SpinningAnimation);
 
@@ -32781,7 +32777,40 @@ var Spinner = function Spinner() {
 
 var _default = Spinner;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/Results.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/resultsComponents/ErrorMessage.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+var _templateObject, _templateObject2;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var ErrorContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    height: 50vh;\n    width: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n"])));
+
+var ErrorText = _styledComponents.default.p(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    color: ", ";\n    font-size: ", ";\n"])), function (props) {
+  return props.theme.fontColorTitles;
+}, function (props) {
+  return props.theme.fontSizes.sizeH3;
+});
+
+var ErrorMessage = function ErrorMessage(_ref) {
+  var error = _ref.error;
+  return _react.default.createElement(ErrorContainer, null, _react.default.createElement(ErrorText, null, error));
+};
+
+var _default = ErrorMessage;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/resultsComponents/Results.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32791,25 +32820,35 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _JobPosting = _interopRequireDefault(require("./JobPosting"));
 
-var _Filters = _interopRequireDefault(require("./Filters"));
+var _Filters = _interopRequireDefault(require("../filtersComponents/Filters"));
 
-var _useApiCall2 = _interopRequireDefault(require("./useApiCall"));
+var _useApiCall2 = _interopRequireDefault(require("../useApiCall"));
 
-var _index = require("./styledCommon/index");
+var _index = require("../styledCommon/index");
 
 var _Spinner = _interopRequireDefault(require("./Spinner"));
 
-var _templateObject, _templateObject2, _templateObject3;
+var _ErrorMessage = _interopRequireDefault(require("./ErrorMessage"));
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -32843,7 +32882,11 @@ var ResultsStyled = _styledComponents.default.ul(_templateObject2 || (_templateO
   return props.theme.mediaQueries.above1100;
 });
 
-var ButtonLoadMore = (0, _styledComponents.default)(_index.ButtonDark)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    padding: 1em 2.5em;\n    position: absolute;\n    bottom: 1em;\n    left: 41%;\n"])));
+var ButtonAnimation = (0, _styledComponents.keyframes)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    0% { visibility: hidden; }\n    100% { visibility: visible; }\n"])));
+
+var ButtonLoadFooter = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    position: absolute;\n    bottom: 0;\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    padding: 1em 0;\n"])));
+
+var ButtonLoadMore = (0, _styledComponents.default)(_index.ButtonDark)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    padding: 1em 2.5em;\n    visibility: hidden;\n    animation: 1s ease-in 6s forwards ", ";  \n"])), ButtonAnimation);
 
 var Results = function Results(_ref) {
   var isSelected = _ref.isSelected,
@@ -32856,12 +32899,26 @@ var Results = function Results(_ref) {
   }),
       _useState2 = _slicedToArray(_useState, 2),
       filters = _useState2[0],
-      setFilters = _useState2[1];
+      setFilters = _useState2[1]; // sets the filters to send the object to useApiCall
 
-  var _useApiCall = (0, _useApiCall2.default)(filters),
+
+  var _useState3 = (0, _react.useState)(1),
+      _useState4 = _slicedToArray(_useState3, 2),
+      page = _useState4[0],
+      setPage = _useState4[1]; // onClick on the load more button page number increases
+
+
+  var _useApiCall = (0, _useApiCall2.default)(filters, page),
       jobs = _useApiCall.jobs,
       isPending = _useApiCall.isPending,
-      error = _useApiCall.error;
+      error = _useApiCall.error; // results from useApiCall
+
+
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      results = _useState6[0],
+      setResults = _useState6[1]; // adds more results to the results when 'Load More' is clicked
+
 
   var addFilters = function addFilters(filter) {
     setFilters(_objectSpread(_objectSpread({}, filters), {}, {
@@ -32869,23 +32926,41 @@ var Results = function Results(_ref) {
       location: filter.location,
       full_time: filter.full_time
     }));
-  };
+  }; // Increase the page number and adds more results to the results
 
+
+  var loadMoreResults = function loadMoreResults() {
+    setPage(page + 1);
+
+    var oldResults = _toConsumableArray(results);
+
+    var newResults = oldResults.concat(jobs);
+    setResults(newResults);
+  }; // watches for change from jobs
+
+
+  (0, _react.useEffect)(function () {
+    setResults(jobs);
+  }, [jobs]);
   return _react.default.createElement(_index.DesktopWrapper, null, _react.default.createElement(MainWrapper, null, _react.default.createElement(_Filters.default, {
     addFilters: addFilters
-  }), isPending ? _react.default.createElement(_Spinner.default, null) : _react.default.createElement("div", null, _react.default.createElement(ResultsStyled, null, jobs.map(function (job) {
+  }), isPending ? _react.default.createElement(_Spinner.default, null) : error ? _react.default.createElement(_ErrorMessage.default, {
+    error: error
+  }) : _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(ResultsStyled, null, results.map(function (job) {
     return _react.default.createElement(_JobPosting.default, {
       key: job.id,
       job: job,
       isSelected: isSelected,
       selectJob: selectJob
     });
-  })), _react.default.createElement(ButtonLoadMore, null, "Load More"))));
+  })), _react.default.createElement(ButtonLoadFooter, null, _react.default.createElement(ButtonLoadMore, {
+    onClick: loadMoreResults
+  }, "Load More")))));
 };
 
 var _default = Results;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./JobPosting":"components/JobPosting.js","./Filters":"components/Filters.js","./useApiCall":"components/useApiCall.js","./styledCommon/index":"components/styledCommon/index.js","./Spinner":"components/Spinner.js"}],"components/descriptionComponents/DescriptionHeader.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./JobPosting":"components/resultsComponents/JobPosting.js","../filtersComponents/Filters":"components/filtersComponents/Filters.js","../useApiCall":"components/useApiCall.js","../styledCommon/index":"components/styledCommon/index.js","./Spinner":"components/resultsComponents/Spinner.js","./ErrorMessage":"components/resultsComponents/ErrorMessage.js"}],"components/descriptionComponents/DescriptionHeader.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33125,7 +33200,7 @@ var DescriptionBtn = function DescriptionBtn(_ref) {
 
 var _default = DescriptionBtn;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../styledCommon":"components/styledCommon/index.js"}],"components/JobDescription.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../styledCommon":"components/styledCommon/index.js"}],"components/descriptionComponents/JobDescription.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33137,13 +33212,13 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _DescriptionHeader = _interopRequireDefault(require("./descriptionComponents/DescriptionHeader"));
+var _DescriptionHeader = _interopRequireDefault(require("./DescriptionHeader"));
 
-var _DescriptionBody = _interopRequireDefault(require("./descriptionComponents/DescriptionBody"));
+var _DescriptionBody = _interopRequireDefault(require("./DescriptionBody"));
 
-var _DescriptionHowToApply = _interopRequireDefault(require("./descriptionComponents/DescriptionHowToApply"));
+var _DescriptionHowToApply = _interopRequireDefault(require("./DescriptionHowToApply"));
 
-var _DescriptionBtn = _interopRequireDefault(require("./descriptionComponents/DescriptionBtn"));
+var _DescriptionBtn = _interopRequireDefault(require("./DescriptionBtn"));
 
 var _templateObject;
 
@@ -33171,7 +33246,7 @@ var JobDescription = function JobDescription(_ref) {
 
 var _default = JobDescription;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./descriptionComponents/DescriptionHeader":"components/descriptionComponents/DescriptionHeader.js","./descriptionComponents/DescriptionBody":"components/descriptionComponents/DescriptionBody.js","./descriptionComponents/DescriptionHowToApply":"components/descriptionComponents/DescriptionHowToApply.js","./descriptionComponents/DescriptionBtn":"components/descriptionComponents/DescriptionBtn.js"}],"components/headerToggle/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./DescriptionHeader":"components/descriptionComponents/DescriptionHeader.js","./DescriptionBody":"components/descriptionComponents/DescriptionBody.js","./DescriptionHowToApply":"components/descriptionComponents/DescriptionHowToApply.js","./DescriptionBtn":"components/descriptionComponents/DescriptionBtn.js"}],"components/headerToggle/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33242,7 +33317,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 // Header with its background images
-var HeaderStyled = _styledComponents.default.header(_templateObject || (_templateObject = _taggedTemplateLiteral([" \n    padding: 2em ", " 4em;\n    position: relative;\n    z-index: 1;\n    overflow: hidden;\n\n    &:before {\n        content: '';\n        position: absolute;\n        top: 0;\n        left: 0;\n        width: 100%;\n        height: 100%;\n        background: no-repeat url(\"data:image/svg+xml,%3Csvg width='375' height='136' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 375 136'%3E%3Cdefs%3E%3Cpath id='a' d='M0 0h375v136H0z'/%3E%3C/defs%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cmask id='b' fill='%23fff'%3E%3Cuse xlink:href='%23a'/%3E%3C/mask%3E%3Cuse fill='%235964E0' transform='matrix(-1 0 0 1 375 0)' xlink:href='%23a'/%3E%3Cg mask='url(%23b)' fill='%23FFF' opacity='.081'%3E%3Cpath d='M313.06-362.235l344.16 164.899c20.42 9.784 29.043 34.27 19.259 54.69a41 41 0 01-13.459 15.87L356.104 88.129c-18.548 12.988-44.114 8.48-57.102-10.069a41 41 0 01-7.219-19.515L254.54-321.26c-2.21-22.535 14.268-42.595 36.803-44.805a41 41 0 0121.717 3.83zM-12.94 32.765l344.16 164.899c20.42 9.784 29.043 34.27 19.259 54.69a41 41 0 01-13.459 15.87L30.104 483.129c-18.548 12.988-44.114 8.48-57.102-10.069a41 41 0 01-7.219-19.515L-71.46 73.74c-2.21-22.535 14.268-42.595 36.803-44.805a41 41 0 0121.717 3.83z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\");\n        display: block;\n        z-index: -1;\n\n        @media screen and (min-width: 376px) {\n            border-bottom-left-radius: 70px;\n            background: no-repeat url(\"data:image/svg+xml,%3Csvg width='768' height='160' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 768 160'%3E%3Cdefs%3E%3Cpath d='M0 0h768v60c0 55.228-44.772 100-100 100H0V0z' id='a'/%3E%3C/defs%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cmask id='b' fill='%23fff'%3E%3Cuse xlink:href='%23a'/%3E%3C/mask%3E%3Cuse fill='%235964E0' transform='matrix(-1 0 0 1 768 0)' xlink:href='%23a'/%3E%3Cg mask='url(%23b)' fill='%23FFF' opacity='.081'%3E%3Cpath d='M313.06-364.235l344.16 164.899c20.42 9.784 29.043 34.27 19.259 54.69a41 41 0 01-13.459 15.87L356.104 86.129c-18.548 12.988-44.114 8.48-57.102-10.069a41 41 0 01-7.219-19.515L254.54-323.26c-2.21-22.535 14.268-42.595 36.803-44.805a41 41 0 0121.717 3.83zM-12.94 30.765l344.16 164.899c20.42 9.784 29.043 34.27 19.259 54.69a41 41 0 01-13.459 15.87L30.104 481.129c-18.548 12.988-44.114 8.48-57.102-10.069a41 41 0 01-7.219-19.515L-71.46 71.74c-2.21-22.535 14.268-42.595 36.803-44.805a41 41 0 0121.717 3.83z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\");\n        }\n\n        @media screen and (min-width: ", ") {\n            background: url(\"data:image/svg+xml,%3Csvg width='1440' height='160' fill='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 160'%3E%3Cpath d='M1440 0H0v60c0 55.228 44.772 100 100 100h1340V0z' fill='%235964E0'/%3E%3Cmask id='a' maskUnits='userSpaceOnUse' x='0' y='0' width='1440' height='160'%3E%3Cpath d='M1440 0H0v60c0 55.228 44.772 100 100 100h1340V0z' fill='%23fff'/%3E%3C/mask%3E%3Cg mask='url(%23a)' fill-rule='evenodd' clip-rule='evenodd' fill='%23fff'%3E%3Cpath opacity='.081' d='M1163.89-205.424c21.12-23.963 60.32-15.63 69.88 14.853l114.11 364.163c9.39 29.936-16.96 58.887-47.64 52.364l-366.492-77.899c-30.685-6.522-42.976-43.685-22.23-67.217l252.372-286.264zM254.539-323.259c-3.117-31.792 29.711-54.779 58.52-40.976L657.22-199.336c28.291 13.555 31.498 52.566 5.8 70.56L356.104 86.129c-25.698 17.994-61.259 1.637-64.321-29.584L254.539-323.26zM-71.46 71.741c-3.119-31.792 29.71-54.78 58.52-40.976l344.16 164.899c28.291 13.555 31.498 52.566 5.8 70.56L30.104 481.129c-25.698 17.994-61.26 1.637-64.32-29.584L-71.462 71.741z'/%3E%3C/g%3E%3C/svg%3E\");\n        }\n    }\n\n    \n\n    @media screen and (min-width: ", ") {\n        border-bottom-left-radius: 70px;\n        padding: 3em ", " 4.5em;\n    }\n"])), function (props) {
+var HeaderStyled = _styledComponents.default.header(_templateObject || (_templateObject = _taggedTemplateLiteral([" \n    padding: 2em ", " 4em;\n    position: relative;\n    z-index: 1;\n    overflow: hidden;\n\n    &:before {\n        content: '';\n        position: absolute;\n        top: 0;\n        left: 0;\n        width: 100%;\n        height: 100%;\n        background: no-repeat url(\"data:image/svg+xml,%3Csvg width='375' height='136' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 375 136'%3E%3Cdefs%3E%3Cpath id='a' d='M0 0h375v136H0z'/%3E%3C/defs%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cmask id='b' fill='%23fff'%3E%3Cuse xlink:href='%23a'/%3E%3C/mask%3E%3Cuse fill='%235964E0' transform='matrix(-1 0 0 1 375 0)' xlink:href='%23a'/%3E%3Cg mask='url(%23b)' fill='%23FFF' opacity='.081'%3E%3Cpath d='M313.06-362.235l344.16 164.899c20.42 9.784 29.043 34.27 19.259 54.69a41 41 0 01-13.459 15.87L356.104 88.129c-18.548 12.988-44.114 8.48-57.102-10.069a41 41 0 01-7.219-19.515L254.54-321.26c-2.21-22.535 14.268-42.595 36.803-44.805a41 41 0 0121.717 3.83zM-12.94 32.765l344.16 164.899c20.42 9.784 29.043 34.27 19.259 54.69a41 41 0 01-13.459 15.87L30.104 483.129c-18.548 12.988-44.114 8.48-57.102-10.069a41 41 0 01-7.219-19.515L-71.46 73.74c-2.21-22.535 14.268-42.595 36.803-44.805a41 41 0 0121.717 3.83z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\");\n        display: block;\n        z-index: -1;\n\n        @media screen and (min-width: 376px) {\n            border-bottom-left-radius: 70px;\n            background: no-repeat url(\"data:image/svg+xml,%3Csvg width='768' height='160' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 768 160'%3E%3Cdefs%3E%3Cpath d='M0 0h768v60c0 55.228-44.772 100-100 100H0V0z' id='a'/%3E%3C/defs%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cmask id='b' fill='%23fff'%3E%3Cuse xlink:href='%23a'/%3E%3C/mask%3E%3Cuse fill='%235964E0' transform='matrix(-1 0 0 1 768 0)' xlink:href='%23a'/%3E%3Cg mask='url(%23b)' fill='%23FFF' opacity='.081'%3E%3Cpath d='M313.06-364.235l344.16 164.899c20.42 9.784 29.043 34.27 19.259 54.69a41 41 0 01-13.459 15.87L356.104 86.129c-18.548 12.988-44.114 8.48-57.102-10.069a41 41 0 01-7.219-19.515L254.54-323.26c-2.21-22.535 14.268-42.595 36.803-44.805a41 41 0 0121.717 3.83zM-12.94 30.765l344.16 164.899c20.42 9.784 29.043 34.27 19.259 54.69a41 41 0 01-13.459 15.87L30.104 481.129c-18.548 12.988-44.114 8.48-57.102-10.069a41 41 0 01-7.219-19.515L-71.46 71.74c-2.21-22.535 14.268-42.595 36.803-44.805a41 41 0 0121.717 3.83z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\");\n        }\n\n        @media screen and (min-width: ", ") {\n            background: url(\"data:image/svg+xml,%3Csvg width='1440' height='160' fill='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 160'%3E%3Cpath d='M1440 0H0v60c0 55.228 44.772 100 100 100h1340V0z' fill='%235964E0'/%3E%3Cmask id='a' maskUnits='userSpaceOnUse' x='0' y='0' width='1440' height='160'%3E%3Cpath d='M1440 0H0v60c0 55.228 44.772 100 100 100h1340V0z' fill='%23fff'/%3E%3C/mask%3E%3Cg mask='url(%23a)' fill-rule='evenodd' clip-rule='evenodd' fill='%23fff'%3E%3Cpath opacity='.081' d='M1163.89-205.424c21.12-23.963 60.32-15.63 69.88 14.853l114.11 364.163c9.39 29.936-16.96 58.887-47.64 52.364l-366.492-77.899c-30.685-6.522-42.976-43.685-22.23-67.217l252.372-286.264zM254.539-323.259c-3.117-31.792 29.711-54.779 58.52-40.976L657.22-199.336c28.291 13.555 31.498 52.566 5.8 70.56L356.104 86.129c-25.698 17.994-61.259 1.637-64.321-29.584L254.539-323.26zM-71.46 71.741c-3.119-31.792 29.71-54.78 58.52-40.976l344.16 164.899c28.291 13.555 31.498 52.566 5.8 70.56L30.104 481.129c-25.698 17.994-61.26 1.637-64.32-29.584L-71.462 71.741z'/%3E%3C/g%3E%3C/svg%3E\");\n        }\n    }\n\n    \n\n    @media screen and (min-width: ", ") {\n        border-bottom-left-radius: 100px;\n        padding: 3em ", " 4.5em;\n    }\n"])), function (props) {
   return props.theme.padding.paddingMobile;
 }, function (props) {
   return props.theme.mediaQueries.above768;
@@ -33413,9 +33488,9 @@ var _reactDom = _interopRequireDefault(require("react-dom"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _Results = _interopRequireDefault(require("./components/Results"));
+var _Results = _interopRequireDefault(require("./components/resultsComponents/Results"));
 
-var _JobDescription = _interopRequireDefault(require("./components/JobDescription"));
+var _JobDescription = _interopRequireDefault(require("./components/descriptionComponents/JobDescription"));
 
 var _Header = _interopRequireDefault(require("./components/Header"));
 
@@ -33496,7 +33571,7 @@ function App() {
 _reactDom.default.render(_react.default.createElement(_styledComponents.ThemeProvider, {
   theme: _theme.default
 }, _react.default.createElement(_globalStyles.default, null), _react.default.createElement(App, null)), document.getElementById('root'));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./components/Results":"components/Results.js","./components/JobDescription":"components/JobDescription.js","./components/Header":"components/Header.js","./components/theme/globalStyles":"components/theme/globalStyles.js","./components/theme/theme":"components/theme/theme.js","./components/theme/darkMode":"components/theme/darkMode.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./components/resultsComponents/Results":"components/resultsComponents/Results.js","./components/descriptionComponents/JobDescription":"components/descriptionComponents/JobDescription.js","./components/Header":"components/Header.js","./components/theme/globalStyles":"components/theme/globalStyles.js","./components/theme/theme":"components/theme/theme.js","./components/theme/darkMode":"components/theme/darkMode.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -33524,7 +33599,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51375" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49785" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
