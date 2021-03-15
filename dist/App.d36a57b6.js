@@ -32141,14 +32141,63 @@ var JobLocation = _styledComponents.default.h4(_templateObject10 || (_templateOb
 
 exports.JobLocation = JobLocation;
 
-var FormSection = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    display: flex;\n    width: 100%;\n    background: ", ";\n    border-radius: 6px;\n    padding: 1em;\n\n    @media screen and (min-width: ", ") {\n        width: auto;\n        padding: 0;\n        flex: 0 1 33%;\n    }\n"])), function (props) {
+var FormSection = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    display: flex;\n    width: 100%;\n    background: ", ";\n    border-radius: 6px;\n    padding: 1em;\n\n    @media screen and (min-width: ", ") {\n        width: auto;\n        padding: 0;\n        /* flex: 0 1 33%; */\n    }\n"])), function (props) {
   return props.theme.boxes;
 }, function (props) {
   return props.theme.mediaQueries.above768;
 });
 
 exports.FormSection = FormSection;
-},{"styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/JobPosting.js":[function(require,module,exports) {
+},{"styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/helperFunctions/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.formatUrl = exports.formatDate = void 0;
+
+var formatDate = function formatDate(dateRetreived) {
+  var today = new Date();
+  var postDate = Date.parse(new Date(dateRetreived));
+  var subtract = Math.floor(Math.abs(today - postDate) / 36e5);
+
+  if (subtract < 23) {
+    return "".concat(subtract, "h ago");
+  } else if (subtract > 23 && subtract < 167) {
+    subtract = Math.ceil(subtract / 24);
+    return "".concat(subtract, "d ago");
+  } else if (subtract > 167) {
+    subtract = Math.ceil(subtract / 168);
+    return "".concat(subtract, "w ago");
+  }
+};
+
+exports.formatDate = formatDate;
+
+var formatUrl = function formatUrl(urlString) {
+  var newStr;
+
+  if (urlString.endsWith('/')) {
+    newStr = urlString.slice(0, urlString.lastIndexOf('/'));
+  } else {
+    newStr = urlString;
+  }
+
+  console.log(newStr, '1');
+
+  if (newStr.includes('www')) {
+    newStr = newStr.slice(newStr.indexOf('www.') + 3);
+  }
+
+  if (!newStr.includes('www')) {
+    newStr = newStr.slice(newStr.indexOf('//') + 2);
+  }
+
+  return newStr;
+};
+
+exports.formatUrl = formatUrl;
+},{}],"components/JobPosting.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32161,6 +32210,8 @@ var _react = _interopRequireWildcard(require("react"));
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 var _index = require("./styledCommon/index");
+
+var _helperFunctions = require("./helperFunctions");
 
 var _templateObject, _templateObject2, _templateObject3;
 
@@ -32184,6 +32235,11 @@ var JobPosting = function JobPosting(_ref) {
   var job = _ref.job,
       isSelected = _ref.isSelected,
       selectJob = _ref.selectJob;
+
+  var dateFormatted = function dateFormatted(newDate) {
+    return (0, _helperFunctions.formatDate)(newDate);
+  };
+
   return _react.default.createElement(JobCard, {
     onClick: function onClick() {
       isSelected();
@@ -32192,12 +32248,117 @@ var JobPosting = function JobPosting(_ref) {
   }, _react.default.createElement(LogoWrapperCard, null, _react.default.createElement(_index.LogoSmall, {
     src: job.company_logo,
     alt: "Logo"
-  })), _react.default.createElement(CardContent, null, _react.default.createElement(_index.AdditionalInfo, null, _react.default.createElement(_index.AdditionalInfoChild, null, job.created_at), _react.default.createElement(_index.AdditionalInfoChild, null, job.type)), _react.default.createElement(_index.TitleH2, null, job.title), _react.default.createElement(_index.InfoSpan, null, job.company), _react.default.createElement(_index.JobLocation, null, job.location)));
+  })), _react.default.createElement(CardContent, null, _react.default.createElement(_index.AdditionalInfo, null, _react.default.createElement(_index.AdditionalInfoChild, null, dateFormatted(job.created_at)), _react.default.createElement(_index.AdditionalInfoChild, null, job.type)), _react.default.createElement(_index.TitleH2, null, job.title), _react.default.createElement(_index.InfoSpan, null, job.company), _react.default.createElement(_index.JobLocation, null, job.location)));
 };
 
 var _default = JobPosting;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./styledCommon/index":"components/styledCommon/index.js"}],"components/checkboxStyles/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./styledCommon/index":"components/styledCommon/index.js","./helperFunctions":"components/helperFunctions/index.js"}],"components/filtersStyles/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MobileFilters = exports.MobileWrapperFilters = exports.ApplyFiltersBtn = exports.SubmitBtnMobileOnly = exports.InputForm = exports.FullTimeSearch = exports.LocationSearch = exports.TitleSearch = exports.FiltersForm = void 0;
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+var _styledCommon = require("../styledCommon");
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+/*  ------------ In Order
+1. Form (parent)
+2. Div for each search parameter: title, location, full time
+3. Input field for text
+4. Submit buttons
+5. Mobile wrappers
+*/
+// ----------------------------------- FORM --------------------------------------
+var FiltersForm = _styledComponents.default.form(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    width: 100%;\n    padding: 0 ", ";\n    transform: translateY(-2.5em);\n    z-index: 10;\n\n    @media screen and (min-width: ", ") {\n        flex-direction: row;\n        transform: translateY(-3em);\n        border-radius: 6px;\n        padding: 0 ", ";\n    }\n\n    @media screen and (min-width: ", ") {\n        padding: 0;\n    }\n"])), function (props) {
+  return props.theme.padding.paddingMobile;
+}, function (props) {
+  return props.theme.mediaQueries.above768;
+}, function (props) {
+  return props.theme.padding.paddingTablet;
+}, function (props) {
+  return props.theme.mediaQueries.above1100;
+}); // -------------------------------------- DIVS FOR EACH SECTION ----------------------------
+
+
+exports.FiltersForm = FiltersForm;
+var TitleSearch = (0, _styledComponents.default)(_styledCommon.FormSection)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    height: auto;\n    justify-content: space-between;\n\n    .mobile-filters-toggle {\n        display: flex;\n        align-items: center;\n    }\n\n    @media screen and (min-width: ", ") {\n        flex-direction: row-reverse;\n        border-top-right-radius: 0;\n        border-bottom-right-radius: 0;\n        padding: 1em;\n        flex: 0 1 33.5%;\n\n        .mobile-filters-toggle-btn {\n            display: none;\n        }\n\n        .mobile-filters-toggle {\n            height: auto;\n        }\n    }\n"])), function (props) {
+  return props.theme.mediaQueries.above768;
+});
+exports.TitleSearch = TitleSearch;
+var LocationSearch = (0, _styledComponents.default)(_styledCommon.FormSection)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    border-bottom-left-radius: 0px;\n    border-bottom-right-radius: 0px;\n\n    label {\n        padding: 0 1em 0 0;\n    }\n\n    @media screen and (min-width: ", ") {\n        height: 100%;\n        flex: 0 1 50%;\n        border-top-right-radius: 0;\n        border-top-left-radius: 0;\n        background: ", ";\n        padding: 1em;\n    }\n"])), function (props) {
+  return props.theme.mediaQueries.above768;
+}, function (props) {
+  return props.theme.boxes;
+});
+exports.LocationSearch = LocationSearch;
+var FullTimeSearch = (0, _styledComponents.default)(_styledCommon.FormSection)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    border-top-left-radius: 0px;\n    border-top-right-radius: 0px;\n    border-top: 1px solid rgba(110,128,152, 0.2);\n\n    .search-button {\n        align-self: center;\n        padding: 1.5em 0 0 0;\n        width: 100%;\n    }\n\n    .full-time-checkbox > label {\n        font-weight: 700;\n        word-break: keep-all;\n        color: ", ";\n        white-space: nowrap;\n    }\n\n    @media screen and (min-width: ", ") {\n        flex-direction: row;\n        align-items: center;\n        justify-content: space-between;\n        flex: 0 1 50%;\n        height: 100%;\n        border: none;\n        /* border-bottom-right-radius: 0; */\n        border-bottom-left-radius: 0;\n        border-top-right-radius: 6px;\n        padding: 1em 1em 1em 0;\n        \n        .search-button {\n            padding: 0;\n            /* flex-shrink: 1; */\n            max-width: 123px;\n        }\n\n        .full-time-checkbox {\n            margin: 0 1em 0 0;\n        }\n    }\n"])), function (props) {
+  return props.theme.fontColorTitles;
+}, function (props) {
+  return props.theme.mediaQueries.above768;
+}); // ------------------------------------- INPUT FIELD -------------------------------------
+
+exports.FullTimeSearch = FullTimeSearch;
+
+var InputForm = _styledComponents.default.input(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    font-family: ", ";\n    font-size: ", ";\n    border: none;\n    background: ", ";\n    color: ", ";\n\n    &::placeholder {\n        font-family: ", ";\n        color: ", ";\n    }\n\n    /* #search-full-time {\n        padding: .3em;\n        background: ", ";\n    } */\n"])), function (props) {
+  return props.theme.fonts.fontStack;
+}, function (props) {
+  return props.theme.fontSizes.sizeP;
+}, function (props) {
+  return props.theme.boxes;
+}, function (props) {
+  return props.theme.fontColorText;
+}, function (props) {
+  return props.theme.fonts.fontStack;
+}, function (props) {
+  return props.theme.fontColorText;
+}, function (props) {
+  return props.theme.colors.violet;
+}); // ---------------------------------------- SUBMIT BUTTONS ---------------------------------
+
+
+exports.InputForm = InputForm;
+
+var SubmitBtnMobileOnly = _styledComponents.default.button(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    background: ", ";\n    border: none;\n    border-radius: 6px;\n    height: 48px;\n    width: 48px;\n    margin: 0 auto 0 1em;\n    cursor: pointer;\n\n    svg > path{\n        fill: white;\n    }\n\n    @media screen and (min-width: ", ") {\n        background: ", ";\n        width: auto;\n        height: auto;\n        margin: 0 1em 0 0;\n\n        svg > path {\n            fill: ", ";\n        }\n    }\n"])), function (props) {
+  return props.theme.colors.violet;
+}, function (props) {
+  return props.theme.mediaQueries.above768;
+}, function (props) {
+  return props.theme.boxes;
+}, function (props) {
+  return props.theme.colors.violet;
+});
+
+exports.SubmitBtnMobileOnly = SubmitBtnMobileOnly;
+var ApplyFiltersBtn = (0, _styledComponents.default)(_styledCommon.ButtonDark)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    width: 100%;\n    padding: 1em 0;\n    font-size: ", ";\n"])), function (props) {
+  return props.theme.fontSizes.sizeP;
+}); // ---------------------------------- MOBILE WRAPPER/BLUR --------------------------------
+
+exports.ApplyFiltersBtn = ApplyFiltersBtn;
+
+var MobileWrapperFilters = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    background: rgba(0, 0, 0, 0.5);\n    position: absolute;\n    top: -150px;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    z-index: 1;\n    height: 200vh;\n    width: 100vw;\n\n    @media screen and (min-width: ", ") {\n        /* background: none;\n        height: 0;\n        width: 0; */\n        display: none;\n    }\n"])), function (props) {
+  return props.theme.mediaQueries.above768;
+});
+
+exports.MobileWrapperFilters = MobileWrapperFilters;
+
+var MobileFilters = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    position: absolute;\n    width: 90%;\n    margin: auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    padding: 1.5em;\n    z-index: 3;\n\n    @media screen and (min-width: ", ") {\n        position: static;\n        background: ", ";\n        flex-direction: row;\n        justify-content: space-between;\n        padding: 0;\n        height: 100%;\n        width: 100%;\n        margin: 0;\n        z-index: unset;\n        border-top-right-radius: 6px;\n        border-bottom-right-radius: 6px;\n        flex: 0 1 66.5%;\n    }\n"])), function (props) {
+  return props.theme.mediaQueries.above768;
+}, function (props) {
+  return props.theme.boxes;
+});
+
+exports.MobileFilters = MobileFilters;
+},{"styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../styledCommon":"components/styledCommon/index.js"}],"components/checkboxStyles/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32213,7 +32374,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var CheckboxContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    display: inline-block;\n    vertical-align: middle;\n"])));
+var CheckboxContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    display: inline-block;\n    vertical-align: middle;\n    margin: 0 1em 0 0;\n"])));
 
 exports.CheckboxContainer = CheckboxContainer;
 
@@ -32249,7 +32410,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var VisibleCheckboxIcon = (0, _styledComponents.default)(_checkboxStyles.VisibleCheckbox)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    background: ", ";\n"])), function (props) {
-  return props.checked ? '#5964E0' : 'rgba(25,32,45, 0.1)';
+  return props.checked ? '#5964E0' : props.theme.fullTimeBox;
 });
 
 var Icon = _styledComponents.default.svg(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    visibility: ", ";\n"])), function (props) {
@@ -32300,9 +32461,9 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 var _styledCommon = require("./styledCommon");
 
-var _Checkbox = _interopRequireDefault(require("./Checkbox"));
+var _filtersStyles = require("./filtersStyles");
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
+var _Checkbox = _interopRequireDefault(require("./Checkbox"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32327,64 +32488,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-var FiltersForm = _styledComponents.default.form(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    width: 100%;\n    padding: 0 ", ";\n    transform: translateY(-3em);\n    z-index: 10;\n\n    .first-form-section {\n        justify-content: space-between;\n    }\n\n    @media screen and (min-width: ", ") {\n        flex-direction: row;\n    }\n"])), function (props) {
-  return props.theme.padding.paddingMobile;
-}, function (props) {
-  return props.theme.mediaQueries.above768;
-});
-
-var TitleSearch = (0, _styledComponents.default)(_styledCommon.FormSection)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    height: auto;\n\n    .mobile-filters-toggle {\n        display: flex;\n        align-items: center;\n    }\n\n    @media screen and (min-width: ", ") {\n        flex-direction: row-reverse;\n\n        .mobile-filters-toggle-btn {\n            display: none;\n        }\n\n        .mobile-filters-toggle {\n            height: auto;\n        }\n    }\n"])), function (props) {
-  return props.theme.mediaQueries.above768;
-});
-var LocationSearch = (0, _styledComponents.default)(_styledCommon.FormSection)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    border-bottom-left-radius: 0px;\n    border-bottom-right-radius: 0px;\n\n    .form-input {\n        padding: 0 0 0 1em;\n    }\n\n    @media screen and (min-width: ", ") {\n        width: 100%;\n        padding: 1.5em;\n    }\n"])), function (props) {
-  return props.theme.mediaQueries.above768;
-});
-var FullTimeSearch = (0, _styledComponents.default)(_styledCommon.FormSection)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    border-top-left-radius: 0px;\n    border-top-right-radius: 0px;\n    border-top: 1px solid rgba(110,128,152, 0.2);\n\n    .search-button {\n        align-self: center;\n        padding: 1.5em 0 0 0;\n        width: 100%;\n    }\n\n    div > label {\n        padding: 0 0 0 1em;\n        font-weight: 700;\n        word-break: keep-all;\n        color: ", ";\n    }\n\n    @media screen and (min-width: ", ") {\n        flex-direction: row;\n        align-items: center;\n    }\n"])), function (props) {
-  return props.theme.fontColorTitle;
-}, function (props) {
-  return props.theme.mediaQueries.above768;
-});
-
-var InputForm = _styledComponents.default.input(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    font-family: ", ";\n    font-size: ", ";\n    border: none;\n    background: ", ";\n    color: ", ";\n\n    &::placeholder {\n        font-family: ", ";\n        color: ", ";\n    }\n\n    /* #search-full-time {\n        padding: .3em;\n        background: ", ";\n    } */\n"])), function (props) {
-  return props.theme.fonts.fontStack;
-}, function (props) {
-  return props.theme.fontSizes.sizeP;
-}, function (props) {
-  return props.theme.boxes;
-}, function (props) {
-  return props.theme.fontColorText;
-}, function (props) {
-  return props.theme.fonts.fontStack;
-}, function (props) {
-  return props.theme.fontColorText;
-}, function (props) {
-  return props.theme.colors.violet;
-});
-
-var SubmitBtn = _styledComponents.default.button(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    background: ", ";\n    border: none;\n    border-radius: 6px;\n    height: 48px;\n    width: 48px;\n    margin: 0 auto 0 1em;\n    cursor: pointer;\n\n    svg > path{\n        fill: white;\n    }\n\n    @media screen and (min-width: ", ") {\n        background: ", ";\n        width: auto;\n        height: auto;\n        margin: 0 1em 0 0;\n\n        svg > path {\n            fill: ", ";\n        }\n    }\n"])), function (props) {
-  return props.theme.colors.violet;
-}, function (props) {
-  return props.theme.mediaQueries.above768;
-}, function (props) {
-  return props.theme.boxes;
-}, function (props) {
-  return props.theme.colors.violet;
-});
-
-var ApplyFiltersBtn = (0, _styledComponents.default)(_styledCommon.ButtonDark)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    width: 100%;\n    padding: 1em 0;\n    font-size: ", ";\n"])), function (props) {
-  return props.theme.fontSizes.sizeP;
-});
-
-var MobileWrapperFilters = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    background: rgba(0, 0, 0, 0.5);\n    position: absolute;\n    top: -150px;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    z-index: 1;\n    height: 200vh;\n    width: 100vw;\n\n    @media screen and (min-width: ", ") {\n        background: none;\n        height: 0;\n        width: 0;\n    }\n"])), function (props) {
-  return props.theme.mediaQueries.above768;
-});
-
-var MobileFilters = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    position: absolute;\n    width: 90%;\n    margin: auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    padding: 1.5em;\n    z-index: 3;\n\n    @media screen and (min-width: ", ") {\n        position: static;\n        background: none;\n        flex-direction: row;\n        padding: 0;\n    }\n"])), function (props) {
-  return props.theme.mediaQueries.above768;
-});
 
 var Filters = function Filters(_ref) {
   var addFilters = _ref.addFilters;
@@ -32448,13 +32551,13 @@ var Filters = function Filters(_ref) {
       setMobileFilters(true);
     }
   });
-  return _react.default.createElement(_styledCommon.DesktopWrapper, null, _react.default.createElement(FiltersForm, {
+  return _react.default.createElement(_styledCommon.DesktopWrapper, null, _react.default.createElement(_filtersStyles.FiltersForm, {
     onSubmit: searchRefined
-  }, _react.default.createElement(TitleSearch, {
+  }, _react.default.createElement(_filtersStyles.TitleSearch, {
     className: "first-form-section"
   }, _react.default.createElement("label", {
     htmlFor: "search-title"
-  }), _react.default.createElement(InputForm, {
+  }), _react.default.createElement(_filtersStyles.InputForm, {
     className: "form-input",
     ref: descriptionRef,
     type: "text",
@@ -32480,7 +32583,7 @@ var Filters = function Filters(_ref) {
     d: "M19.108 0H.86a.86.86 0 00-.764.455.833.833 0 00.068.884l6.685 9.202.007.01c.242.32.374.708.375 1.107v7.502a.825.825 0 00.248.594.865.865 0 00.942.18l3.756-1.4c.337-.1.56-.41.56-.784v-6.092c0-.399.132-.787.375-1.108l.007-.009 6.685-9.202c.19-.26.217-.6.068-.884A.86.86 0 0019.108 0z",
     fill: "#6E8098",
     fillRule: "nonzero"
-  })), _react.default.createElement(SubmitBtn, {
+  })), _react.default.createElement(_filtersStyles.SubmitBtnMobileOnly, {
     type: "submit",
     className: "search-title-button"
   }, _react.default.createElement("svg", {
@@ -32492,11 +32595,11 @@ var Filters = function Filters(_ref) {
     d: "M17.112 15.059h-1.088l-.377-.377a8.814 8.814 0 002.15-5.784A8.898 8.898 0 008.898 0 8.898 8.898 0 000 8.898a8.898 8.898 0 008.898 8.899c2.211 0 4.23-.808 5.784-2.143l.377.377v1.081l6.845 6.832 2.04-2.04-6.832-6.845zm-8.214 0A6.16 6.16 0 118.9 2.737a6.16 6.16 0 010 12.322z",
     fill: "#5964E0",
     fillRule: "nonzero"
-  }))))), mobileFilters ? _react.default.createElement(MobileWrapperFilters, {
+  }))))), mobileFilters ? _react.default.createElement(_filtersStyles.MobileWrapperFilters, {
     onClick: toggleMobileFilters
-  }) : null, mobileFilters ? _react.default.createElement(MobileFilters, {
+  }) : null, mobileFilters ? _react.default.createElement(_filtersStyles.MobileFilters, {
     mobileFilters: mobileFilters
-  }, _react.default.createElement(LocationSearch, null, _react.default.createElement("svg", {
+  }, _react.default.createElement(_filtersStyles.LocationSearch, null, _react.default.createElement("svg", {
     width: "17",
     height: "24",
     xmlns: "http://www.w3.org/2000/svg",
@@ -32507,7 +32610,7 @@ var Filters = function Filters(_ref) {
     fillRule: "nonzero"
   })), _react.default.createElement("label", {
     htmlFor: "search-location"
-  }), _react.default.createElement(InputForm, {
+  }), _react.default.createElement(_filtersStyles.InputForm, {
     className: "form-input",
     ref: locationRef,
     type: "text",
@@ -32517,21 +32620,23 @@ var Filters = function Filters(_ref) {
     onChange: function onChange(e) {
       return setLocation(e.target.value);
     }
-  })), _react.default.createElement(FullTimeSearch, null, _react.default.createElement("div", null, _react.default.createElement("label", {
+  })), _react.default.createElement(_filtersStyles.FullTimeSearch, null, _react.default.createElement("div", {
+    className: "full-time-checkbox"
+  }, _react.default.createElement("label", {
     htmlFor: "search-full-time"
-  }, "Full Time", _react.default.createElement(_Checkbox.default, {
+  }, _react.default.createElement(_Checkbox.default, {
     checked: fullTime,
     setFullTime: setFullTime
-  }))), _react.default.createElement("div", {
+  }), "Full Time")), _react.default.createElement("div", {
     className: "search-button"
-  }, _react.default.createElement(ApplyFiltersBtn, {
+  }, _react.default.createElement(_filtersStyles.ApplyFiltersBtn, {
     type: "submit"
   }, "Search")))) : null));
 };
 
 var _default = Filters;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./styledCommon":"components/styledCommon/index.js","./Checkbox":"components/Checkbox.js"}],"components/useApiCall.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./styledCommon":"components/styledCommon/index.js","./filtersStyles":"components/filtersStyles/index.js","./Checkbox":"components/Checkbox.js"}],"components/useApiCall.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32638,7 +32743,45 @@ function useApiCall(_ref) {
 
 var _default = useApiCall;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"components/Results.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"components/Spinner.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _styledComponents = _interopRequireWildcard(require("styled-components"));
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var SpinningAnimation = (0, _styledComponents.keyframes)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }\n    100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }\n"])));
+
+var SpinnerScreen = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n"])));
+
+var SpinnerElement = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    height: 100px;\n    width: 100px;\n    border: 1px solid black;\n    display: flex;\n    border-radius: 50%;\n    position: relative;\n"])));
+
+var SpinnerCircle = _styledComponents.default.span(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    height: 50px;\n    width: 50px;\n    border-radius: 50%;\n    border-top: 5px solid ", ";\n    border: 5px solid white;\n    animation: 1s linear infinite ", ";\n"])), function (props) {
+  return props.theme.colors.violet;
+}, SpinningAnimation);
+
+var Spinner = function Spinner() {
+  return _react.default.createElement(SpinnerScreen, null, _react.default.createElement(SpinnerCircle, null));
+};
+
+var _default = Spinner;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/Results.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32658,7 +32801,9 @@ var _useApiCall2 = _interopRequireDefault(require("./useApiCall"));
 
 var _index = require("./styledCommon/index");
 
-var _templateObject, _templateObject2;
+var _Spinner = _interopRequireDefault(require("./Spinner"));
+
+var _templateObject, _templateObject2, _templateObject3;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32686,17 +32831,19 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ResultsStyled = _styledComponents.default.ul(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    display: grid;\n    grid-template-columns: minmax(0, 1fr);\n    grid-auto-rows: 253px;\n    justify-content: space-between;\n    justify-items: center;\n    grid-row-gap: 3em;\n    grid-column-gap: 1em;\n    padding: 1em ", " 2em;\n\n    @media screen and (min-width: ", ") {\n        grid-template-columns: repeat(2, auto);\n        grid-row-gap: 3em;\n        padding: 4.5em ", " 2em;\n    }\n\n    @media screen and (min-width: ", ") {\n        grid-template-columns: repeat(3, auto);\n        padding: 4em 0;\n    }\n"])), function (props) {
+var MainWrapper = _styledComponents.default.main(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    padding: 0 0 6em 0;\n    position: relative;\n"])));
+
+var ResultsStyled = _styledComponents.default.ul(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: grid;\n    grid-template-columns: minmax(0, 1fr);\n    grid-auto-rows: 253px;\n    justify-content: space-between;\n    justify-items: center;\n    grid-row-gap: 3em;\n    grid-column-gap: 1em;\n    padding: 1em ", " 2em;\n\n    @media screen and (min-width: ", ") {\n        grid-template-columns: repeat(2, auto);\n        grid-row-gap: 3em;\n        padding: 2.5em ", " 2em;\n    }\n\n    @media screen and (min-width: ", ") {\n        grid-template-columns: repeat(3, auto);\n        padding: 2em 0;\n    }\n"])), function (props) {
   return props.theme.padding.paddingMobile;
 }, function (props) {
   return props.theme.mediaQueries.above768;
 }, function (props) {
   return props.theme.padding.paddingTablet;
 }, function (props) {
-  return props.theme.mediaQueries.above1300;
+  return props.theme.mediaQueries.above1100;
 });
 
-var ButtonLoadMore = (0, _styledComponents.default)(_index.ButtonDark)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    padding: 1em 2.5em;\n"])));
+var ButtonLoadMore = (0, _styledComponents.default)(_index.ButtonDark)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    padding: 1em 2.5em;\n    position: absolute;\n    bottom: 1em;\n    left: 41%;\n"])));
 
 var Results = function Results(_ref) {
   var isSelected = _ref.isSelected,
@@ -32724,21 +32871,21 @@ var Results = function Results(_ref) {
     }));
   };
 
-  return _react.default.createElement(_index.DesktopWrapper, null, _react.default.createElement("main", null, _react.default.createElement(_Filters.default, {
+  return _react.default.createElement(_index.DesktopWrapper, null, _react.default.createElement(MainWrapper, null, _react.default.createElement(_Filters.default, {
     addFilters: addFilters
-  }), _react.default.createElement(ResultsStyled, null, jobs.map(function (job) {
+  }), isPending ? _react.default.createElement(_Spinner.default, null) : _react.default.createElement("div", null, _react.default.createElement(ResultsStyled, null, jobs.map(function (job) {
     return _react.default.createElement(_JobPosting.default, {
       key: job.id,
       job: job,
       isSelected: isSelected,
       selectJob: selectJob
     });
-  })), _react.default.createElement(ButtonLoadMore, null, "Load More")));
+  })), _react.default.createElement(ButtonLoadMore, null, "Load More"))));
 };
 
 var _default = Results;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./JobPosting":"components/JobPosting.js","./Filters":"components/Filters.js","./useApiCall":"components/useApiCall.js","./styledCommon/index":"components/styledCommon/index.js"}],"components/descriptionComponents/DescriptionHeader.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","./JobPosting":"components/JobPosting.js","./Filters":"components/Filters.js","./useApiCall":"components/useApiCall.js","./styledCommon/index":"components/styledCommon/index.js","./Spinner":"components/Spinner.js"}],"components/descriptionComponents/DescriptionHeader.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32751,6 +32898,8 @@ var _react = _interopRequireDefault(require("react"));
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 var _styledCommon = require("../styledCommon");
+
+var _helperFunctions = require("../helperFunctions");
 
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
 
@@ -32765,7 +32914,7 @@ var DescriptionHeaderStyled = _styledComponents.default.section(_templateObject 
 }, function (props) {
   return props.theme.padding.paddingTablet;
 }, function (props) {
-  return props.theme.mediaQueries.above1300;
+  return props.theme.mediaQueries.above1100;
 }, function (props) {
   return props.theme.padding.paddingDesktop;
 });
@@ -32785,17 +32934,22 @@ var CompanySiteBtn = (0, _styledComponents.default)(_styledCommon.ButtonLight)(_
 
 var DescriptionHeader = function DescriptionHeader(_ref) {
   var job = _ref.job;
+
+  var formattedUrl = function formattedUrl(newUrl) {
+    return (0, _helperFunctions.formatUrl)(newUrl);
+  };
+
   return _react.default.createElement(_styledCommon.DesktopWrapper, null, _react.default.createElement(DescriptionHeaderStyled, null, _react.default.createElement(LogoWrapperHeader, null, _react.default.createElement(LogoSmallHeader, {
     src: job.company_logo,
     alt: "Logo"
-  })), _react.default.createElement(CompanyName, null, _react.default.createElement(_styledCommon.TitleH2, null, job.company), _react.default.createElement(_styledCommon.InfoSpan, null, job.company_url)), _react.default.createElement(CompanySiteBtn, null, _react.default.createElement("a", {
+  })), _react.default.createElement(CompanyName, null, _react.default.createElement(_styledCommon.TitleH2, null, job.company), _react.default.createElement(_styledCommon.InfoSpan, null, formattedUrl(job.company_url))), _react.default.createElement(CompanySiteBtn, null, _react.default.createElement("a", {
     href: job.company_url
   }, "Company site"))));
 };
 
 var _default = DescriptionHeader;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../styledCommon":"components/styledCommon/index.js"}],"components/descriptionComponents/DescriptionBody.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../styledCommon":"components/styledCommon/index.js","../helperFunctions":"components/helperFunctions/index.js"}],"components/descriptionComponents/DescriptionBody.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32808,6 +32962,8 @@ var _react = _interopRequireDefault(require("react"));
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 var _styledCommon = require("../styledCommon");
+
+var _helperFunctions = require("../helperFunctions");
 
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
 
@@ -32824,7 +32980,7 @@ var DescriptionBodyStyled = _styledComponents.default.section(_templateObject ||
 }, function (props) {
   return props.theme.padding.paddingTablet;
 }, function (props) {
-  return props.theme.mediaQueries.above1300;
+  return props.theme.mediaQueries.above1100;
 }, function (props) {
   return props.theme.padding.paddingDesktop;
 });
@@ -32850,7 +33006,12 @@ var BodyContent = _styledComponents.default.div(_templateObject6 || (_templateOb
 
 var DescriptionBody = function DescriptionBody(_ref) {
   var job = _ref.job;
-  return _react.default.createElement(_styledCommon.DesktopWrapper, null, _react.default.createElement(DescriptionBodyStyled, null, _react.default.createElement(BodyMainInfo, null, _react.default.createElement(JobMainInfo, null, _react.default.createElement(_styledCommon.AdditionalInfo, null, _react.default.createElement(_styledCommon.AdditionalInfoChild, null, job.created_at), _react.default.createElement(_styledCommon.AdditionalInfoChild, null, job.type)), _react.default.createElement(BodyJobTitle, null, job.title), _react.default.createElement(_styledCommon.JobLocation, null, job.location)), _react.default.createElement(ApplyNowBtn, null, _react.default.createElement("a", {
+
+  var dateFormatted = function dateFormatted(newDate) {
+    return (0, _helperFunctions.formatDate)(newDate);
+  };
+
+  return _react.default.createElement(_styledCommon.DesktopWrapper, null, _react.default.createElement(DescriptionBodyStyled, null, _react.default.createElement(BodyMainInfo, null, _react.default.createElement(JobMainInfo, null, _react.default.createElement(_styledCommon.AdditionalInfo, null, _react.default.createElement(_styledCommon.AdditionalInfoChild, null, dateFormatted(job.created_at)), _react.default.createElement(_styledCommon.AdditionalInfoChild, null, job.type)), _react.default.createElement(BodyJobTitle, null, job.title), _react.default.createElement(_styledCommon.JobLocation, null, job.location)), _react.default.createElement(ApplyNowBtn, null, _react.default.createElement("a", {
     href: job.how_to_apply
   }, "Apply Now"))), _react.default.createElement(BodyContent, {
     dangerouslySetInnerHTML: {
@@ -32861,7 +33022,7 @@ var DescriptionBody = function DescriptionBody(_ref) {
 
 var _default = DescriptionBody;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../styledCommon":"components/styledCommon/index.js"}],"components/descriptionComponents/DescriptionHowToApply.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../styledCommon":"components/styledCommon/index.js","../helperFunctions":"components/helperFunctions/index.js"}],"components/descriptionComponents/DescriptionHowToApply.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32892,7 +33053,7 @@ var HowToApply = _styledComponents.default.section(_templateObject || (_template
 }, function (props) {
   return props.theme.padding.paddingTablet;
 }, function (props) {
-  return props.theme.mediaQueries.above1300;
+  return props.theme.mediaQueries.above1100;
 }, function (props) {
   return props.theme.padding.paddingDesktop;
 });
@@ -33016,35 +33177,30 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ToggleButton = exports.SliderSpan = exports.ToggleLabel = exports.ToggleSwitchContainer = void 0;
+exports.ToggleButton = exports.ToggleDiv = exports.ToggleSwitchContainer = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+var _templateObject, _templateObject2, _templateObject3;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ToggleSwitchContainer = _styledComponents.default.fieldset(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    display: flex;\n    width: auto;\n    align-items: center;\n"])));
+// Container includes the switch button and icons sun/moon
+var ToggleSwitchContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    display: flex;\n    width: auto;\n    align-items: center;\n    border: none;\n"])));
 
 exports.ToggleSwitchContainer = ToggleSwitchContainer;
 
-var ToggleLabel = _styledComponents.default.label(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: relative;\n    display: inline-block;\n    width: 48px;\n    height: 24px;\n"])));
+var ToggleDiv = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: relative;\n    display: inline-block;\n    width: 48px;\n    height: 24px;\n"])));
 
-exports.ToggleLabel = ToggleLabel;
+exports.ToggleDiv = ToggleDiv;
 
-var SliderSpan = _styledComponents.default.span(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    position: absolute;\n    cursor: pointer;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: ", ";\n    transition: 400ms;\n    border-radius: 34px;\n\n    &:before {\n        content: '';\n        position: absolute;\n        height: 18px;\n        width: 18px;\n        left: 3px;\n        bottom: 3px;\n        background: white;\n        transition: 400ms;\n        border-radius: 50%;\n    }  \n"])), function (props) {
+var ToggleButton = _styledComponents.default.button(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    position: absolute;\n    cursor: pointer;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    width: 100%;\n    height: 100%;\n    background: ", ";\n    transition: 400ms;\n    border-radius: 34px;\n    border: none;\n\n    &:before {\n        content: '';\n        position: absolute;\n        height: 18px;\n        width: 18px;\n        left: 3px;\n        bottom: 3px;\n        background: ", ";\n        transition: 400ms;\n        border-radius: 50%;\n    }\n"])), function (props) {
+  return props.theme.colors.white;
+}, function (props) {
   return props.theme.colors.violet;
 });
-
-exports.SliderSpan = SliderSpan;
-
-var ToggleButton = _styledComponents.default.input.attrs({
-  type: 'checkbox'
-})(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    opacity: 0;\n    width: 30px;\n    height: 30px;\n\n    &:checked + ", " {\n        background: ", ";\n    }\n\n    &:focus + ", " {\n        box-shadow: 0 0 1px red;\n    }\n\n    &:checked + ", ":before {\n        transform: translateX(26px);\n    }\n"])), SliderSpan, function (props) {
-  return props.theme.colors.violet;
-}, SliderSpan, SliderSpan);
 
 exports.ToggleButton = ToggleButton;
 },{"styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/Header.js":[function(require,module,exports) {
@@ -33055,7 +33211,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
@@ -33063,12 +33219,29 @@ var _index = require("./styledCommon/index");
 
 var _headerToggle = require("./headerToggle");
 
-var _templateObject, _templateObject2, _templateObject3;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
+// Header with its background images
 var HeaderStyled = _styledComponents.default.header(_templateObject || (_templateObject = _taggedTemplateLiteral([" \n    padding: 2em ", " 4em;\n    position: relative;\n    z-index: 1;\n    overflow: hidden;\n\n    &:before {\n        content: '';\n        position: absolute;\n        top: 0;\n        left: 0;\n        width: 100%;\n        height: 100%;\n        background: no-repeat url(\"data:image/svg+xml,%3Csvg width='375' height='136' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 375 136'%3E%3Cdefs%3E%3Cpath id='a' d='M0 0h375v136H0z'/%3E%3C/defs%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cmask id='b' fill='%23fff'%3E%3Cuse xlink:href='%23a'/%3E%3C/mask%3E%3Cuse fill='%235964E0' transform='matrix(-1 0 0 1 375 0)' xlink:href='%23a'/%3E%3Cg mask='url(%23b)' fill='%23FFF' opacity='.081'%3E%3Cpath d='M313.06-362.235l344.16 164.899c20.42 9.784 29.043 34.27 19.259 54.69a41 41 0 01-13.459 15.87L356.104 88.129c-18.548 12.988-44.114 8.48-57.102-10.069a41 41 0 01-7.219-19.515L254.54-321.26c-2.21-22.535 14.268-42.595 36.803-44.805a41 41 0 0121.717 3.83zM-12.94 32.765l344.16 164.899c20.42 9.784 29.043 34.27 19.259 54.69a41 41 0 01-13.459 15.87L30.104 483.129c-18.548 12.988-44.114 8.48-57.102-10.069a41 41 0 01-7.219-19.515L-71.46 73.74c-2.21-22.535 14.268-42.595 36.803-44.805a41 41 0 0121.717 3.83z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\");\n        display: block;\n        z-index: -1;\n\n        @media screen and (min-width: 376px) {\n            border-bottom-left-radius: 70px;\n            background: no-repeat url(\"data:image/svg+xml,%3Csvg width='768' height='160' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 768 160'%3E%3Cdefs%3E%3Cpath d='M0 0h768v60c0 55.228-44.772 100-100 100H0V0z' id='a'/%3E%3C/defs%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cmask id='b' fill='%23fff'%3E%3Cuse xlink:href='%23a'/%3E%3C/mask%3E%3Cuse fill='%235964E0' transform='matrix(-1 0 0 1 768 0)' xlink:href='%23a'/%3E%3Cg mask='url(%23b)' fill='%23FFF' opacity='.081'%3E%3Cpath d='M313.06-364.235l344.16 164.899c20.42 9.784 29.043 34.27 19.259 54.69a41 41 0 01-13.459 15.87L356.104 86.129c-18.548 12.988-44.114 8.48-57.102-10.069a41 41 0 01-7.219-19.515L254.54-323.26c-2.21-22.535 14.268-42.595 36.803-44.805a41 41 0 0121.717 3.83zM-12.94 30.765l344.16 164.899c20.42 9.784 29.043 34.27 19.259 54.69a41 41 0 01-13.459 15.87L30.104 481.129c-18.548 12.988-44.114 8.48-57.102-10.069a41 41 0 01-7.219-19.515L-71.46 71.74c-2.21-22.535 14.268-42.595 36.803-44.805a41 41 0 0121.717 3.83z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\");\n        }\n\n        @media screen and (min-width: ", ") {\n            background: url(\"data:image/svg+xml,%3Csvg width='1440' height='160' fill='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 160'%3E%3Cpath d='M1440 0H0v60c0 55.228 44.772 100 100 100h1340V0z' fill='%235964E0'/%3E%3Cmask id='a' maskUnits='userSpaceOnUse' x='0' y='0' width='1440' height='160'%3E%3Cpath d='M1440 0H0v60c0 55.228 44.772 100 100 100h1340V0z' fill='%23fff'/%3E%3C/mask%3E%3Cg mask='url(%23a)' fill-rule='evenodd' clip-rule='evenodd' fill='%23fff'%3E%3Cpath opacity='.081' d='M1163.89-205.424c21.12-23.963 60.32-15.63 69.88 14.853l114.11 364.163c9.39 29.936-16.96 58.887-47.64 52.364l-366.492-77.899c-30.685-6.522-42.976-43.685-22.23-67.217l252.372-286.264zM254.539-323.259c-3.117-31.792 29.711-54.779 58.52-40.976L657.22-199.336c28.291 13.555 31.498 52.566 5.8 70.56L356.104 86.129c-25.698 17.994-61.259 1.637-64.321-29.584L254.539-323.26zM-71.46 71.741c-3.119-31.792 29.71-54.78 58.52-40.976l344.16 164.899c28.291 13.555 31.498 52.566 5.8 70.56L30.104 481.129c-25.698 17.994-61.26 1.637-64.32-29.584L-71.462 71.741z'/%3E%3C/g%3E%3C/svg%3E\");\n        }\n    }\n\n    \n\n    @media screen and (min-width: ", ") {\n        border-bottom-left-radius: 70px;\n        padding: 3em ", " 4.5em;\n    }\n"])), function (props) {
   return props.theme.padding.paddingMobile;
 }, function (props) {
@@ -33077,16 +33250,34 @@ var HeaderStyled = _styledComponents.default.header(_templateObject || (_templat
   return props.theme.mediaQueries.above600;
 }, function (props) {
   return props.theme.padding.paddingTablet;
+}); // Uses the DesktopWrapper size and position items in header
+
+
+var HeaderContent = (0, _styledComponents.default)(_index.DesktopWrapper)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: space-between;\n"]))); // Toggle icons sun/moon margins
+
+var IconToggle = _styledComponents.default.svg(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    &:first-of-type {\n        margin: 0 1em 0 0;\n    }\n\n    &:last-of-type {\n        margin: 0 0 0 1em;\n    }\n"]))); // Slides the knob for dark/light mode
+
+
+var ToggleButtonSwitch = (0, _styledComponents.default)(_headerToggle.ToggleButton)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    &:before {\n        transform: ", ";\n    }\n"])), function (_ref) {
+  var toggled = _ref.toggled;
+  return toggled ? 'translateX(24px)' : 'translateX(0px)';
 });
 
-var HeaderContent = (0, _styledComponents.default)(_index.DesktopWrapper)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: space-between;\n"])));
+var Header = function Header(_ref2) {
+  var toggleTheme = _ref2.toggleTheme;
 
-var IconToggle = _styledComponents.default.svg(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    &:first-of-type {\n        margin: 0 1em 0 0;\n    }\n\n    &:last-of-type {\n        margin: 0 0 0 1em;\n    }\n"])));
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      toggled = _useState2[0],
+      setToggled = _useState2[1];
 
-var Header = function Header(_ref) {
-  var toggleTheme = _ref.toggleTheme,
-      theme = _ref.theme;
-  return _react.default.createElement(HeaderStyled, null, _react.default.createElement(_index.DesktopWrapper, null, _react.default.createElement(HeaderContent, null, _react.default.createElement("h1", null, _react.default.createElement("a", {
+  var toggleSwitch = function toggleSwitch() {
+    // toggle the theme and button value (toggleTheme from the app component)
+    setToggled(!toggled);
+    toggled ? toggleTheme('light') : toggleTheme('dark');
+  };
+
+  return _react.default.createElement(HeaderStyled, null, _react.default.createElement(HeaderContent, null, _react.default.createElement("h1", null, _react.default.createElement("a", {
     href: "/"
   }, _react.default.createElement("svg", {
     width: "115",
@@ -33106,18 +33297,13 @@ var Header = function Header(_ref) {
     d: "M10 15.635c.33 0 .612.295.612.639v1.89c0 .344-.282.638-.612.638s-.612-.294-.612-.638v-1.89c0-.344.282-.639.612-.639zm-4.488-1.783c.27.262.27.68 0 .941L4.03 16.231a.698.698 0 01-.97 0 .649.649 0 010-.941l1.482-1.438c.27-.261.7-.261.97 0zm9.946 0l1.483 1.438c.27.261.27.68 0 .941a.698.698 0 01-.97 0l-1.483-1.438a.649.649 0 010-.94c.242-.262.674-.262.97 0zM10 4.552c1.396 0 2.685.525 3.598 1.4.913.85 1.504 2.05 1.504 3.35 0 1.3-.59 2.5-1.504 3.35a5.314 5.314 0 01-3.598 1.4c-1.396 0-2.685-.525-3.598-1.4-.913-.85-1.504-2.05-1.504-3.35 0-1.3.564-2.5 1.504-3.35A5.314 5.314 0 0110 4.552zM2.607 8.906c.355 0 .658.274.658.594 0 .32-.303.594-.658.594H.658C.304 10.094 0 9.82 0 9.5c0-.32.304-.594.658-.594h1.95zm16.735 0c.354 0 .658.274.658.594 0 .32-.304.594-.658.594h-1.95c-.354 0-.657-.274-.657-.594 0-.32.303-.594.658-.594h1.949zM4.03 2.77l1.482 1.438c.27.261.27.68 0 .94-.242.262-.674.262-.97 0L3.059 3.71a.649.649 0 010-.941c.27-.261.701-.261.97 0zm12.91 0c.27.261.27.68 0 .941l-1.482 1.438a.698.698 0 01-.97 0 .649.649 0 010-.941l1.482-1.438c.27-.261.701-.261.97 0zM10 .198c.33 0 .612.294.612.638v1.89c0 .344-.282.639-.612.639s-.612-.295-.612-.639V.836c0-.344.282-.638.612-.638z",
     fill: "#FFF",
     fillRule: "nonzero"
-  })), _react.default.createElement(_headerToggle.ToggleLabel, {
-    htmlFor: "light-mode",
+  })), _react.default.createElement(_headerToggle.ToggleDiv, {
     className: "switch-color-mode"
-  }, _react.default.createElement(_headerToggle.ToggleButton, {
-    name: "color-switch",
+  }, _react.default.createElement(ToggleButtonSwitch, {
     id: "light-dark-mode",
-    checked: theme,
-    onChange: function onChange() {
-      toggleTheme(theme);
-      console.log(theme);
-    }
-  }), _react.default.createElement(_headerToggle.SliderSpan, null)), _react.default.createElement(IconToggle, {
+    toggled: toggled,
+    onClick: toggleSwitch
+  })), _react.default.createElement(IconToggle, {
     width: "12",
     height: "12",
     xmlns: "http://www.w3.org/2000/svg",
@@ -33126,7 +33312,7 @@ var Header = function Header(_ref) {
     d: "M6 0c1.516 0 2.925.566 3.978 1.523A3.979 3.979 0 008 1a4.014 4.014 0 00-2.821 1.179A3.927 3.927 0 004 5c0 1.095.463 2.105 1.179 2.821A3.927 3.927 0 008 9a4.034 4.034 0 003.974-3.548c.017.18.026.364.026.548a6.02 6.02 0 01-1.768 4.232A6.02 6.02 0 016 12a5.89 5.89 0 01-4.232-1.768A6.02 6.02 0 010 6a5.89 5.89 0 011.768-4.232A6.02 6.02 0 016 0z",
     fill: "#FFF",
     fillRule: "nonzero"
-  }))))));
+  })))));
 };
 
 var _default = Header;
@@ -33181,7 +33367,7 @@ var _default = {
     above375: '376px',
     above600: '600px',
     above768: '768px',
-    above1300: '1300px'
+    above1100: '1100px'
   },
   padding: {
     paddingMobile: '1.5em',
@@ -33197,13 +33383,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.darkTheme = exports.lightTheme = void 0;
+// Dark mode colors
 var lightTheme = {
   mainBackground: '#F2F2F2',
   boxes: '#FFFFFF',
   fontColorTitles: '#19202D',
   fontColorText: '#9DAEC2',
   buttonLightBox: 'rgba(89,100,224, 0.1)',
-  buttonLightText: '#5964E0'
+  buttonLightText: '#5964E0',
+  fullTimeBox: 'rgba(25,32,45, 0.1)'
 };
 exports.lightTheme = lightTheme;
 var darkTheme = {
@@ -33211,8 +33399,9 @@ var darkTheme = {
   boxes: '#19202D',
   fontColorTitles: '#FFFFFF',
   fontColorText: '#6E8098',
-  buttonLightBox: 'rgba(25,32,45, 0.7)',
-  buttonLightText: '#FFFFFF'
+  buttonLightBox: 'rgba(255,255,255, 0.1)',
+  buttonLightText: '#FFFFFF',
+  fullTimeBox: 'rgba(255,255,255, 0.1)'
 };
 exports.darkTheme = darkTheme;
 },{}],"App.js":[function(require,module,exports) {
@@ -33273,7 +33462,7 @@ function App() {
       currentJob = _useState4[0],
       setCurrentJob = _useState4[1];
 
-  var _useState5 = (0, _react.useState)('dark'),
+  var _useState5 = (0, _react.useState)('light'),
       _useState6 = _slicedToArray(_useState5, 2),
       theme = _useState6[0],
       setTheme = _useState6[1];
@@ -33287,7 +33476,7 @@ function App() {
   };
 
   var toggleTheme = function toggleTheme(choice) {
-    choice === true ? setTheme('light') : setTheme('dark');
+    choice === 'light' ? setTheme('light') : setTheme('dark');
   };
 
   return _react.default.createElement(_styledComponents.ThemeProvider, {
@@ -33335,7 +33524,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49408" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51375" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

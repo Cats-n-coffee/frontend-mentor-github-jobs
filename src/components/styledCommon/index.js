@@ -118,6 +118,6 @@ export const FormSection = styled.div`
     @media screen and (min-width: ${ (props) => props.theme.mediaQueries.above768 }) {
         width: auto;
         padding: 0;
-        flex: 0 1 33%;
+        /* flex: 0 1 33%; */
     }
 `;

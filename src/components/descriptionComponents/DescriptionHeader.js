@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { LogoWrapper, LogoSmall, ButtonLight, TitleH2, InfoSpan, DesktopWrapper } from '../styledCommon';
+import { formatUrl } from '../helperFunctions'
 
 const DescriptionHeaderStyled = styled.section`
     display: flex;
@@ -23,7 +24,7 @@ const DescriptionHeaderStyled = styled.section`
         margin: -2em 0 0 0;
     }
 
-    @media screen and (min-width: ${ (props) => props.theme.mediaQueries.above1300}) {
+    @media screen and (min-width: ${ (props) => props.theme.mediaQueries.above1100}) {
         padding: 2.5em ${ (props) => props.theme.padding.paddingDesktop };
     }
 `;
@@ -81,6 +82,10 @@ const CompanySiteBtn = styled(ButtonLight)`
 
 
 const DescriptionHeader = ({ job }) => {
+    const formattedUrl = (newUrl) => {
+        return formatUrl(newUrl)
+    }
+
     return ( 
         <DesktopWrapper>
             <DescriptionHeaderStyled>
@@ -89,7 +94,7 @@ const DescriptionHeader = ({ job }) => {
                 </LogoWrapperHeader>
                 <CompanyName>
                     <TitleH2>{ job.company }</TitleH2>
-                    <InfoSpan>{ job.company_url }</InfoSpan>
+                    <InfoSpan>{ formattedUrl(job.company_url) }</InfoSpan>
                 </CompanyName>
                 <CompanySiteBtn>
                     <a href={ job.company_url }>

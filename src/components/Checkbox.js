@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { CheckboxContainer, HiddenCheckbox, VisibleCheckbox } from './checkboxStyles'
 
 const VisibleCheckboxIcon = styled(VisibleCheckbox)`
-    background: ${ (props) => props.checked ? '#5964E0' : 'rgba(25,32,45, 0.1)' };
+    background: ${ (props) => props.checked ? '#5964E0' : props.theme.fullTimeBox };
 `;
 
 const Icon = styled.svg`

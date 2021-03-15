@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import { LogoSmall, TitleH2, InfoSpan, LogoWrapper, AdditionalInfoChild, JobLocation, AdditionalInfo } from './styledCommon/index'
+import { formatDate } from './helperFunctions'
 
 const JobCard = styled.li`
     min-width: 300px;
@@ -28,6 +29,9 @@ const CardContent = styled.div`
 
 
 const JobPosting = ({ job, isSelected, selectJob }) => {
+    const dateFormatted = (newDate) => {
+        return formatDate(newDate);
+    }
 
     return ( 
         <JobCard onClick={ () => {
@@ -39,7 +43,7 @@ const JobPosting = ({ job, isSelected, selectJob }) => {
             </LogoWrapperCard>
             <CardContent>
                 <AdditionalInfo>
-                    <AdditionalInfoChild>{ job.created_at }</AdditionalInfoChild>
+                    <AdditionalInfoChild>{ dateFormatted(job.created_at) }</AdditionalInfoChild>
                     <AdditionalInfoChild>{ job.type }</AdditionalInfoChild>
                 </AdditionalInfo>
                 <TitleH2>{ job.title }</TitleH2>

@@ -30,7 +30,7 @@ const HowToApply = styled.section`
         padding: 1em ${ (props) => props.theme.padding.paddingTablet };
     }
 
-    @media screen and (min-width: ${ (props) => props.theme.mediaQueries.above1300}) {
+    @media screen and (min-width: ${ (props) => props.theme.mediaQueries.above1100}) {
         padding: 1em ${ (props) => props.theme.padding.paddingDesktop };
     }
 `;

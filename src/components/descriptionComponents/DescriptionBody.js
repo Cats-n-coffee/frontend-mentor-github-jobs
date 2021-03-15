@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { JobLocation, TitleH2, AdditionalInfo, AdditionalInfoChild, ButtonDark, DesktopWrapper } from '../styledCommon';
+import { formatDate } from '../helperFunctions'
 
 const DescriptionBodyStyled = styled.section`
     padding: 2em ${ (props) => props.theme.padding.paddingMobile };
@@ -12,7 +13,7 @@ const DescriptionBodyStyled = styled.section`
         padding: 2em ${ (props) => props.theme.padding.paddingTablet };
     }
 
-    @media screen and (min-width: ${ (props) => props.theme.mediaQueries.above1300}) {
+    @media screen and (min-width: ${ (props) => props.theme.mediaQueries.above1100}) {
         padding: 2em ${ (props) => props.theme.padding.paddingDesktop };
     }
 `;
@@ -64,6 +65,9 @@ const BodyContent = styled.div`
 `;
 
 const DescriptionBody = ({ job }) => {
+    const dateFormatted = (newDate) => {
+        return formatDate(newDate);
+    }
 
     return (
         <DesktopWrapper> 
@@ -71,7 +75,7 @@ const DescriptionBody = ({ job }) => {
                 <BodyMainInfo>
                     <JobMainInfo>
                         <AdditionalInfo>
-                            <AdditionalInfoChild>{ job.created_at }</AdditionalInfoChild>
+                            <AdditionalInfoChild>{ dateFormatted(job.created_at) }</AdditionalInfoChild>
                             <AdditionalInfoChild>{ job.type }</AdditionalInfoChild>
                         </AdditionalInfo>
                         <BodyJobTitle>{ job.title }</BodyJobTitle>

@@ -29,7 +29,7 @@ export default {
         above375: '376px',
         above600: '600px',
         above768: '768px',
-        above1300: '1300px',
+        above1100: '1100px',
     },
 
     padding: {

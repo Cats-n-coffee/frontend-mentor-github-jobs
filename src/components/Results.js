@@ -5,7 +5,13 @@ import JobPosting from './JobPosting'
 import Filters from './Filters'
 import useApiCall from './useApiCall';
 import { DesktopWrapper, ButtonDark } from './styledCommon/index'
+import Spinner from './Spinner';
 
+
+const MainWrapper = styled.main`
+    padding: 0 0 6em 0;
+    position: relative;
+`;
 
 const ResultsStyled = styled.ul`
     display: grid;
@@ -20,17 +26,20 @@ const ResultsStyled = styled.ul`
     @media screen and (min-width: ${(props) => props.theme.mediaQueries.above768}) {
         grid-template-columns: repeat(2, auto);
         grid-row-gap: 3em;
-        padding: 4.5em ${(props) => props.theme.padding.paddingTablet} 2em;
+        padding: 2.5em ${(props) => props.theme.padding.paddingTablet} 2em;
     }
 
-    @media screen and (min-width: ${(props) => props.theme.mediaQueries.above1300}) {
+    @media screen and (min-width: ${(props) => props.theme.mediaQueries.above1100}) {
         grid-template-columns: repeat(3, auto);
-        padding: 4em 0;
+        padding: 2em 0;
     }
 `;
 
 const ButtonLoadMore = styled(ButtonDark)`
     padding: 1em 2.5em;
+    position: absolute;
+    bottom: 1em;
+    left: 41%;
 `;
 
 const Results = ({ isSelected, selectJob }) => {
@@ -41,10 +50,14 @@ const Results = ({ isSelected, selectJob }) => {
         setFilters({...filters, description: filter.description, location: filter.location, full_time: filter.full_time})
     }
 
+    
+
     return (
         <DesktopWrapper>
-            <main>
+            <MainWrapper>
                     <Filters addFilters={ addFilters }/>
+                    { isPending ? <Spinner/> 
+                    : <div>
                     <ResultsStyled>
                         {jobs.map(job => {
                             return (
@@ -56,8 +69,9 @@ const Results = ({ isSelected, selectJob }) => {
                             )
                         })}
                     </ResultsStyled>
-                    <ButtonLoadMore>Load More</ButtonLoadMore>
-            </main>
+                    <ButtonLoadMore>Load More</ButtonLoadMore> 
+                    </div> }
+            </MainWrapper>
         </DesktopWrapper>
     )
 }

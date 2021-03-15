@@ -18,7 +18,7 @@ const AppWrapper = styled.div`
 function App() {
     const [isSelected, setIsSelected] = useState(false);
     const [currentJob, setCurrentJob] = useState('');
-    const [theme, setTheme] = useState('dark');
+    const [theme, setTheme] = useState('light');
 
     const displayDescription = () => {
         setIsSelected(!isSelected);
@@ -29,7 +29,7 @@ function App() {
     }
 
     const toggleTheme = (choice) => {
-        choice === true ? setTheme('light') : setTheme('dark');
+        choice === 'light' ? setTheme('light') : setTheme('dark');
     }
 
     return (

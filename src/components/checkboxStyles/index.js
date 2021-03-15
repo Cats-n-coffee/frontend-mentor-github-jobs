@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const CheckboxContainer = styled.div`
     display: inline-block;
     vertical-align: middle;
+    margin: 0 1em 0 0;
 `;
 
 export const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
